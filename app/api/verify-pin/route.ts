@@ -16,3 +16,9 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ success: false, message: 'Server error' }, { status: 500 });
   }
 }
+
+export async function GET() {
+  return NextResponse.json({ 
+    message: 'API is running. Use POST with PIN.' 
+  });
+}
