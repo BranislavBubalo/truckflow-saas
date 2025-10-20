@@ -34,7 +34,7 @@ export default function TruckFlowLanding() {
         new: {
           title: 'TruckFlow AI',
           points: [
-            '$499/month for 25 trucks',
+            '$1,299/month for 25 trucks',
             'AI finds loads 24/7',
             'Smart load scoring',
             'Real-time GPS tracking',
@@ -83,10 +83,10 @@ export default function TruckFlowLanding() {
         subtitle: 'Choose what works for your business',
         fixed: {
           name: 'Fixed Price',
-          price: '$499',
+          price: '$1,299',
           period: '/month',
           desc: 'Perfect for growing fleets',
-          badge: '50% CHEAPER',
+          badge: 'PREMIUM AI',
           features: [
             'Up to 25 trucks included',
             'Unlimited loads',
@@ -146,8 +146,8 @@ export default function TruckFlowLanding() {
           savings: 'You Save',
         },
         rows: [
-          { trucks: '10', competitor: '$350-600', truckflow: '$499', savings: '$101/mo' },
-          { trucks: '25', competitor: '$875-1,500', truckflow: '$499', savings: '$876/mo' },
+          { trucks: '10', competitor: '$350-600', truckflow: '$1,299', savings: '$101/mo' },
+          { trucks: '25', competitor: '$875-1,500', truckflow: '$1,299', savings: '$876/mo' },
           { trucks: '50', competitor: '$1,750-3,000', truckflow: '$999*', savings: '$1,501/mo' },
         ],
         note: '*Contact us for 50+ trucks custom pricing',
@@ -196,7 +196,7 @@ export default function TruckFlowLanding() {
         new: {
           title: 'TruckFlow AI',
           points: [
-            '$499/mesečno za 25 kamiona',
+            '$1,299/mesečno za 25 kamiona',
             'AI nalazi loadove 24/7',
             'Pametno rangiranje loadova',
             'GPS praćenje uživo',
@@ -245,7 +245,7 @@ export default function TruckFlowLanding() {
         subtitle: 'Izaberi šta odgovara tvojoj firmi',
         fixed: {
           name: 'Fiksna Cena',
-          price: '$499',
+          price: '$1,299',
           period: '/mesečno',
           desc: 'Savršeno za flote u rastu',
           badge: '50% JEFTINIJE',
@@ -308,8 +308,8 @@ export default function TruckFlowLanding() {
           savings: 'Ušteda',
         },
         rows: [
-          { trucks: '10', competitor: '$350-600', truckflow: '$499', savings: '$101/mes' },
-          { trucks: '25', competitor: '$875-1,500', truckflow: '$499', savings: '$876/mes' },
+          { trucks: '10', competitor: '$350-600', truckflow: '$1,299', savings: '$101/mes' },
+          { trucks: '25', competitor: '$875-1,500', truckflow: '$1,299', savings: '$876/mes' },
           { trucks: '50', competitor: '$1,750-3,000', truckflow: '$999*', savings: '$1,501/mes' },
         ],
         note: '*Kontaktiraj nas za 50+ kamiona custom pricing',
@@ -371,7 +371,7 @@ export default function TruckFlowLanding() {
             animate={{ opacity: 1, scale: 1 }}
             className="inline-block px-6 py-2 bg-green-500/20 border border-green-500/50 rounded-full text-green-400 font-bold mb-8"
           >
-            50% CHEAPER THAN COMPETITORS
+            PREMIUM AI THAN COMPETITORS
           </motion.div>
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
