@@ -1,0 +1,77 @@
+'use client';
+
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { motion } from 'framer-motion';
+
+export default function ProtectedLandingPage() {
+  const [isAuthorized, setIsAuthorized] = useState(false);
+  const [isChecking, setIsChecking] = useState(true);
+  const router = useRouter();
+
+  useEffect(() => {
+    // Proveri da li ima auth cookie
+    const cookies = document.cookie.split(';');
+    const authCookie = cookies.find(c => c.trim().startsWith('auth_pin='));
+    
+    if (!authCookie) {
+      // NEMA PIN - redirect na login!
+      router.push('/login');
+    } else {
+      // IMA PIN - prikaži stranicu
+      setIsAuthorized(true);
+      setIsChecking(false);
+    }
+  }, [router]);
+
+  // Dok proverava - prikaži loading
+  if (isChecking) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 flex items-center justify-center">
+        <div className="text-white text-2xl">Verifying access...</div>
+      </div>
+    );
+  }
+
+  // Ako nije autorizovan - ne prikazuj ništa (već redirektuješ)
+  if (!isAuthorized) {
+    return null;
+  }
+
+  // AUTORIZOVAN - prikaži landing page
+  return <LandingPageContent />;
+}
+
+function LandingPageContent() {
+  const [language, setLanguage] = useState<'en' | 'sr'>('en');
+
+  const content = {
+    en: {
+      nav: {
+        features: 'Features',
+        pricing: 'Pricing',
+        contact: 'Contact',
+      },
+      hero: {
+        title: 'AI-Powered Fleet Management',
+        subtitle: 'Premium AI platform that helps you manage 5x more trucks with intelligent automation.',
+        cta: 'Start Free Trial',
+        cta2: 'Watch Demo',
+      },
+      // ... COPY REST OF CONTENT FROM PREVIOUS VERSION
+    },
+    sr: {
+      // ... SERBIAN CONTENT
+    }
+  };
+
+  const t = content[language];
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900">
+      {/* REST OF LANDING PAGE */}
+      <h1 className="text-6xl font-bold text-white">{t.hero.title}</h1>
+      {/* etc... */}
+    </div>
+  );
+}
