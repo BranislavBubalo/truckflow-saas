@@ -87,14 +87,14 @@ export default function FleetHubLanding() {
       pricing: {
         title: 'Flexible Pricing Options',
         subtitle: 'Choose the solution that fits your business',
-       dispatch: {
-  name: 'Dispatch as a Service',
-  productName: 'FleetHub',
-price: 'Register for',
-priceSubtext: 'Pricing',
-  period: '',
-  desc: 'Complete dispatch platform',
-  badge: 'ENTERPRISE',
+        dispatch: {
+          name: 'Dispatch as a Service',
+          productName: 'FleetHub',
+          price: 'Register for',
+          priceSubtext: 'Pricing',
+          period: '',
+          desc: 'Complete dispatch platform',
+          badge: 'ENTERPRISE',
           features: [
             'AI Load Scoring Engine',
             'Real-time Trip Cost Calculator',
@@ -272,20 +272,17 @@ priceSubtext: 'Pricing',
                 </div>
                 
                 <div className="flex gap-4 pt-4">
-  <button
-    type="button"
-    onClick={() => setShowRegisterModal(false)}
-    className="flex-1 px-6 py-3 bg-white/10 hover:bg-white/20 rounded-lg text-white font-semibold transition"
-  >
-    {t.register.cancel}
-  </button>
-  <button
-    type="submit"
-    className="flex-1 px-6 py-3 bg-blue-500 hover:bg-blue-600 rounded-lg text-white font-semibold transition"
-  >
-    {t.register.submit}
-  </button>
-</div>
+                  <button
+                    type="button"
+                    onClick={() => setShowRegisterModal(false)}
+                    className="flex-1 px-6 py-3 bg-white/10 hover:bg-white/20 rounded-lg text-white font-semibold transition"
+                  >
+                    {t.register.cancel}
+                  </button>
+                  <button
+                    type="submit"
+                    className="flex-1 px-6 py-3 bg-blue-500 hover:bg-blue-600 rounded-lg text-white font-semibold transition"
+                  >
                     {t.register.submit}
                   </button>
                 </div>
@@ -443,20 +440,20 @@ priceSubtext: 'Pricing',
           <div className="grid md:grid-cols-3 gap-8">
             {/* Dispatch as a Service */}
             <PricingCard
-  badge={t.pricing.dispatch.badge}
-  name={t.pricing.dispatch.name}
-  productName={t.pricing.dispatch.productName}
-  price={t.pricing.dispatch.price}
-  priceSubtext={t.pricing.dispatch.priceSubtext}
-  period={t.pricing.dispatch.period}
-  desc={t.pricing.dispatch.desc}
-  features={t.pricing.dispatch.features}
-  comparison={t.pricing.dispatch.comparison}
-  cta={t.pricing.dispatch.cta}
-  color="blue"
-  popular
-  onClick={() => setShowRegisterModal(true)}
-/>
+              badge={t.pricing.dispatch.badge}
+              name={t.pricing.dispatch.name}
+              productName={t.pricing.dispatch.productName}
+              price={t.pricing.dispatch.price}
+              priceSubtext={t.pricing.dispatch.priceSubtext}
+              period={t.pricing.dispatch.period}
+              desc={t.pricing.dispatch.desc}
+              features={t.pricing.dispatch.features}
+              comparison={t.pricing.dispatch.comparison}
+              cta={t.pricing.dispatch.cta}
+              color="blue"
+              popular
+              onClick={() => setShowRegisterModal(true)}
+            />
 
             {/* Company Driver App */}
             <PricingCard
@@ -489,53 +486,52 @@ priceSubtext: 'Pricing',
         </div>
       </section>
 
-      {/* Enterprise Tiers */}
       {/* Enterprise CTA with Screenshot */}
-<section className="py-20 px-6 bg-black/20">
-  <div className="max-w-6xl mx-auto">
-    <div className="grid md:grid-cols-2 gap-12 items-center">
-      <div>
-        <h2 className="text-5xl font-bold text-white mb-6">Enterprise Solutions</h2>
-        <p className="text-2xl text-white/70 mb-6">
-          For fleets with 50+ trucks, we offer custom pricing, dedicated support, and advanced analytics.
-        </p>
-        <ul className="space-y-4 mb-8">
-          <li className="flex items-center gap-3 text-white/80 text-lg">
-            <span className="text-green-400">✓</span>
-            <span>Custom pricing & volume discounts</span>
-          </li>
-          <li className="flex items-center gap-3 text-white/80 text-lg">
-            <span className="text-green-400">✓</span>
-            <span>Dedicated account manager</span>
-          </li>
-          <li className="flex items-center gap-3 text-white/80 text-lg">
-            <span className="text-green-400">✓</span>
-            <span>Priority support & onboarding</span>
-          </li>
-          <li className="flex items-center gap-3 text-white/80 text-lg">
-            <span className="text-green-400">✓</span>
-            <span>Advanced analytics & reporting</span>
-          </li>
-        </ul>
-        <button 
-          onClick={() => setShowRegisterModal(true)}
-          className="px-10 py-5 bg-blue-500 hover:bg-blue-600 rounded-xl text-white font-bold text-xl transition shadow-lg"
-        >
-          Contact Sales
-        </button>
-      </div>
-      <div className="relative">
-        <div className="bg-gradient-to-br from-purple-500/10 to-blue-500/10 border border-white/10 rounded-2xl p-4 shadow-2xl">
-          <img 
-            src="/dashboard-preview.png" 
-            alt="FleetHub Analytics Dashboard"
-            className="rounded-lg w-full"
-          />
+      <section className="py-20 px-6 bg-black/20">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div>
+              <h2 className="text-5xl font-bold text-white mb-6">Enterprise Solutions</h2>
+              <p className="text-2xl text-white/70 mb-6">
+                For fleets with 50+ trucks, we offer custom pricing, dedicated support, and advanced analytics.
+              </p>
+              <ul className="space-y-4 mb-8">
+                <li className="flex items-center gap-3 text-white/80 text-lg">
+                  <span className="text-green-400">✓</span>
+                  <span>Custom pricing & volume discounts</span>
+                </li>
+                <li className="flex items-center gap-3 text-white/80 text-lg">
+                  <span className="text-green-400">✓</span>
+                  <span>Dedicated account manager</span>
+                </li>
+                <li className="flex items-center gap-3 text-white/80 text-lg">
+                  <span className="text-green-400">✓</span>
+                  <span>Priority support & onboarding</span>
+                </li>
+                <li className="flex items-center gap-3 text-white/80 text-lg">
+                  <span className="text-green-400">✓</span>
+                  <span>Advanced analytics & reporting</span>
+                </li>
+              </ul>
+              <button 
+                onClick={() => setShowRegisterModal(true)}
+                className="px-10 py-5 bg-blue-500 hover:bg-blue-600 rounded-xl text-white font-bold text-xl transition shadow-lg"
+              >
+                Contact Sales
+              </button>
+            </div>
+            <div className="relative">
+              <div className="bg-gradient-to-br from-purple-500/10 to-blue-500/10 border border-white/10 rounded-2xl p-4 shadow-2xl">
+                <img 
+                  src="/dashboard-preview.png" 
+                  alt="FleetHub Analytics Dashboard"
+                  className="rounded-lg w-full"
+                />
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
+      </section>
 
       {/* CTA */}
       <section className="py-20 px-6 bg-gradient-to-r from-blue-600 to-purple-600">
@@ -582,6 +578,8 @@ priceSubtext: 'Pricing',
       </footer>
     </div>
   );
+}
+
 function PricingCard({ badge, name, productName, price, priceSubtext, period, desc, features, comparison, cta, color, popular, onClick }: any) {
   const colors: any = {
     blue: 'from-blue-500/20 to-blue-600/20 border-blue-500/50',
@@ -604,10 +602,10 @@ function PricingCard({ badge, name, productName, price, priceSubtext, period, de
       <p className="text-blue-400 font-semibold text-lg mb-2">{productName}</p>
       <p className="text-white/60 mb-6">{desc}</p>
       <div className="mb-6">
-	<div className="text-4xl font-bold text-white">{price}</div>
-	{priceSubtext && <div className="text-2xl text-white/80 mt-1">{priceSubtext}</div>}
-	{period && <div className="text-white/60 text-xl">{period}</div>}
-</div>
+        <div className="text-4xl font-bold text-white">{price}</div>
+        {priceSubtext && <div className="text-2xl text-white/80 mt-1">{priceSubtext}</div>}
+        {period && <div className="text-white/60 text-xl">{period}</div>}
+      </div>
       <div className="text-sm text-white/50 mb-6 italic">{comparison}</div>
       <ul className="space-y-3 mb-8">
         {features.map((feature: string, i: number) => (
@@ -626,5 +624,3 @@ function PricingCard({ badge, name, productName, price, priceSubtext, period, de
     </div>
   );
 }
-}
-
