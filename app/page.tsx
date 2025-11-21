@@ -1,3 +1,4 @@
+cat > ~/TruckFlow/truckflow-saas/app/page.tsx << 'EOF'
 'use client';
 
 import { useState } from 'react';
@@ -216,11 +217,41 @@ export default function FleetHubLanding() {
               <h3 className="text-3xl font-bold text-white mb-2">{t.register.title}</h3>
               <p className="text-white/60 mb-6">{t.register.subtitle}</p>
               
-              <form className="space-y-4">
+              <form className="space-y-4" onSubmit={async (e) => {
+                e.preventDefault();
+                const formData = new FormData(e.currentTarget);
+                const data = {
+                  name: formData.get('name'),
+                  title: formData.get('title'),
+                  company: formData.get('company'),
+                  website: formData.get('website'),
+                  email: formData.get('email'),
+                  phone: formData.get('phone'),
+                };
+                
+                try {
+                  const res = await fetch('/api/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data),
+                  });
+                  
+                  if (res.ok) {
+                    alert('Registration submitted! We will contact you soon.');
+                    setShowRegisterModal(false);
+                  } else {
+                    alert('Failed to submit. Please try again.');
+                  }
+                } catch (error) {
+                  alert('Error submitting registration.');
+                }
+              }}>
                 <div>
                   <label className="block text-white/80 mb-2 text-sm">{t.register.fields.name}</label>
                   <input
+                    name="name"
                     type="text"
+                    required
                     className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white focus:border-blue-500 focus:outline-none"
                     placeholder="John Doe"
                   />
@@ -229,7 +260,9 @@ export default function FleetHubLanding() {
                 <div>
                   <label className="block text-white/80 mb-2 text-sm">{t.register.fields.title}</label>
                   <input
+                    name="title"
                     type="text"
+                    required
                     className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white focus:border-blue-500 focus:outline-none"
                     placeholder="Fleet Manager"
                   />
@@ -238,7 +271,9 @@ export default function FleetHubLanding() {
                 <div>
                   <label className="block text-white/80 mb-2 text-sm">{t.register.fields.company}</label>
                   <input
+                    name="company"
                     type="text"
+                    required
                     className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white focus:border-blue-500 focus:outline-none"
                     placeholder="ABC Trucking LLC"
                   />
@@ -247,6 +282,7 @@ export default function FleetHubLanding() {
                 <div>
                   <label className="block text-white/80 mb-2 text-sm">{t.register.fields.website}</label>
                   <input
+                    name="website"
                     type="url"
                     className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white focus:border-blue-500 focus:outline-none"
                     placeholder="https://example.com"
@@ -256,7 +292,9 @@ export default function FleetHubLanding() {
                 <div>
                   <label className="block text-white/80 mb-2 text-sm">{t.register.fields.email}</label>
                   <input
+                    name="email"
                     type="email"
+                    required
                     className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white focus:border-blue-500 focus:outline-none"
                     placeholder="contact@example.com"
                   />
@@ -265,7 +303,9 @@ export default function FleetHubLanding() {
                 <div>
                   <label className="block text-white/80 mb-2 text-sm">{t.register.fields.phone}</label>
                   <input
+                    name="phone"
                     type="tel"
+                    required
                     className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white focus:border-blue-500 focus:outline-none"
                     placeholder="+1 (555) 123-4567"
                   />
@@ -438,50 +478,48 @@ export default function FleetHubLanding() {
             <p className="text-2xl text-white/60">{t.pricing.subtitle}</p>
           </div>
           <div className="grid md:grid-cols-3 gap-8">
-            {/* Dispatch as a Service */}
-            <PricingCard
-              badge={t.pricing.dispatch.badge}
-              name={t.pricing.dispatch.name}
-              productName={t.pricing.dispatch.productName}
-              price={t.pricing.dispatch.price}
-              priceSubtext={t.pricing.dispatch.priceSubtext}
-              period={t.pricing.dispatch.period}
-              desc={t.pricing.dispatch.desc}
-              features={t.pricing.dispatch.features}
-              comparison={t.pricing.dispatch.comparison}
-              cta={t.pricing.dispatch.cta}
-              color="blue"
-              popular
-              onClick={() => setShowRegisterModal(true)}
-            />
-
-            {/* Company Driver App */}
-            <PricingCard
-              badge={t.pricing.driver.badge}
-              name={t.pricing.driver.name}
-              productName={t.pricing.driver.productName}
-              price={t.pricing.driver.price}
-              period={t.pricing.driver.period}
-              desc={t.pricing.driver.desc}
-              features={t.pricing.driver.features}
-              comparison={t.pricing.driver.comparison}
-              cta={t.pricing.driver.cta}
-              color="green"
-            />
-
-            {/* Owner-Operator App */}
-            <PricingCard
-              badge={t.pricing.ownerOperator.badge}
-              name={t.pricing.ownerOperator.name}
-              productName={t.pricing.ownerOperator.productName}
-              price={t.pricing.ownerOperator.price}
-              period={t.pricing.ownerOperator.period}
-              desc={t.pricing.ownerOperator.desc}
-              features={t.pricing.ownerOperator.features}
-              comparison={t.pricing.ownerOperator.comparison}
-              cta={t.pricing.ownerOperator.cta}
-              color="purple"
-            />
+           <PricingCard
+  badge={t.pricing.dispatch.badge}
+  name={t.pricing.dispatch.name}
+  productName={t.pricing.dispatch.productName}
+  price={t.pricing.dispatch.price}
+  priceSubtext={t.pricing.dispatch.priceSubtext}
+  period={t.pricing.dispatch.period}
+  desc={t.pricing.dispatch.desc}
+  features={t.pricing.dispatch.features}
+  comparison={t.pricing.dispatch.comparison}
+  cta={t.pricing.dispatch.cta}
+  color="blue"
+  popular
+  onClick={() => setShowRegisterModal(true)}
+/>
+<PricingCard
+  badge={t.pricing.driver.badge}
+  name={t.pricing.driver.name}
+  productName={t.pricing.driver.productName}
+  price={t.pricing.driver.price}
+  period={t.pricing.driver.period}
+  desc={t.pricing.driver.desc}
+  features={t.pricing.driver.features}
+  comparison={t.pricing.driver.comparison}
+  cta={t.pricing.driver.cta}
+  color="green"
+  onClick={() => setShowRegisterModal(true)}
+/>
+<PricingCard
+  badge={t.pricing.ownerOperator.badge}
+  name={t.pricing.ownerOperator.name}
+  productName={t.pricing.ownerOperator.productName}
+  price={t.pricing.ownerOperator.price}
+  period={t.pricing.ownerOperator.period}
+  desc={t.pricing.ownerOperator.desc}
+  features={t.pricing.ownerOperator.features}
+  comparison={t.pricing.ownerOperator.comparison}
+  cta={t.pricing.ownerOperator.cta}
+  color="purple"
+  onClick={() => setShowRegisterModal(true)}
+/>
+           
           </div>
         </div>
       </section>
@@ -624,3 +662,4 @@ function PricingCard({ badge, name, productName, price, priceSubtext, period, de
     </div>
   );
 }
+EOF
