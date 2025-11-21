@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default function FleetHubLanding() {
-  const [language, setLanguage] = useState<'en' | 'sr'>('en');
+  const [language, setLanguage] = useState<'en'>('en');
   const [showRegisterModal, setShowRegisterModal] = useState(false);
 
   const content = {
@@ -272,17 +272,20 @@ priceSubtext: 'Pricing',
                 </div>
                 
                 <div className="flex gap-4 pt-4">
-                  <button
-                    type="button"
-                    onClick={() => setShowRegisterModal(false)}
-                    className="flex-1 px-6 py-3 bg-white/10 hover:bg-white/20 rounded-lg text-white font-semibold transition"
-                  >
-                    {t.register.cancel}
-                  </button>
-                  <button
-                    type="submit"
-                    className="flex-1 px-6 py-3 bg-blue-500 hover:bg-blue-600 rounded-lg text-white font-semibold transition"
-                  >
+  <button
+    type="button"
+    onClick={() => setShowRegisterModal(false)}
+    className="flex-1 px-6 py-3 bg-white/10 hover:bg-white/20 rounded-lg text-white font-semibold transition"
+  >
+    {t.register.cancel}
+  </button>
+  <button
+    type="submit"
+    className="flex-1 px-6 py-3 bg-blue-500 hover:bg-blue-600 rounded-lg text-white font-semibold transition"
+  >
+    {t.register.submit}
+  </button>
+</div>
                     {t.register.submit}
                   </button>
                 </div>
