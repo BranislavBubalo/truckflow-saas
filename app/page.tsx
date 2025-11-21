@@ -282,9 +282,11 @@ export default function FleetHubLanding() {
                   <label className="block text-white/80 mb-2 text-sm">{t.register.fields.website}</label>
                   <input
                     name="website"
-                    type="url"
+                    type="text"
+                    pattern=".*\.(com|net|org|biz|info|io|co|us|uk|ca|au).*"
+                    title="Please enter a valid website (must include .com, .net, .org, etc.)"
                     className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white focus:border-blue-500 focus:outline-none"
-                    placeholder="https://example.com"
+                    placeholder="example.com or https://example.com"
                   />
                 </div>
                 
@@ -477,48 +479,47 @@ export default function FleetHubLanding() {
             <p className="text-2xl text-white/60">{t.pricing.subtitle}</p>
           </div>
           <div className="grid md:grid-cols-3 gap-8">
-           <PricingCard
-  badge={t.pricing.dispatch.badge}
-  name={t.pricing.dispatch.name}
-  productName={t.pricing.dispatch.productName}
-  price={t.pricing.dispatch.price}
-  priceSubtext={t.pricing.dispatch.priceSubtext}
-  period={t.pricing.dispatch.period}
-  desc={t.pricing.dispatch.desc}
-  features={t.pricing.dispatch.features}
-  comparison={t.pricing.dispatch.comparison}
-  cta={t.pricing.dispatch.cta}
-  color="blue"
-  popular
-  onClick={() => setShowRegisterModal(true)}
-/>
-<PricingCard
-  badge={t.pricing.driver.badge}
-  name={t.pricing.driver.name}
-  productName={t.pricing.driver.productName}
-  price={t.pricing.driver.price}
-  period={t.pricing.driver.period}
-  desc={t.pricing.driver.desc}
-  features={t.pricing.driver.features}
-  comparison={t.pricing.driver.comparison}
-  cta={t.pricing.driver.cta}
-  color="green"
-  onClick={() => setShowRegisterModal(true)}
-/>
-<PricingCard
-  badge={t.pricing.ownerOperator.badge}
-  name={t.pricing.ownerOperator.name}
-  productName={t.pricing.ownerOperator.productName}
-  price={t.pricing.ownerOperator.price}
-  period={t.pricing.ownerOperator.period}
-  desc={t.pricing.ownerOperator.desc}
-  features={t.pricing.ownerOperator.features}
-  comparison={t.pricing.ownerOperator.comparison}
-  cta={t.pricing.ownerOperator.cta}
-  color="purple"
-  onClick={() => setShowRegisterModal(true)}
-/>
-           
+            <PricingCard
+              badge={t.pricing.dispatch.badge}
+              name={t.pricing.dispatch.name}
+              productName={t.pricing.dispatch.productName}
+              price={t.pricing.dispatch.price}
+              priceSubtext={t.pricing.dispatch.priceSubtext}
+              period={t.pricing.dispatch.period}
+              desc={t.pricing.dispatch.desc}
+              features={t.pricing.dispatch.features}
+              comparison={t.pricing.dispatch.comparison}
+              cta={t.pricing.dispatch.cta}
+              color="blue"
+              popular
+              onClick={() => setShowRegisterModal(true)}
+            />
+            <PricingCard
+              badge={t.pricing.driver.badge}
+              name={t.pricing.driver.name}
+              productName={t.pricing.driver.productName}
+              price={t.pricing.driver.price}
+              period={t.pricing.driver.period}
+              desc={t.pricing.driver.desc}
+              features={t.pricing.driver.features}
+              comparison={t.pricing.driver.comparison}
+              cta={t.pricing.driver.cta}
+              color="green"
+              onClick={() => setShowRegisterModal(true)}
+            />
+            <PricingCard
+              badge={t.pricing.ownerOperator.badge}
+              name={t.pricing.ownerOperator.name}
+              productName={t.pricing.ownerOperator.productName}
+              price={t.pricing.ownerOperator.price}
+              period={t.pricing.ownerOperator.period}
+              desc={t.pricing.ownerOperator.desc}
+              features={t.pricing.ownerOperator.features}
+              comparison={t.pricing.ownerOperator.comparison}
+              cta={t.pricing.ownerOperator.cta}
+              color="purple"
+              onClick={() => setShowRegisterModal(true)}
+            />
           </div>
         </div>
       </section>
