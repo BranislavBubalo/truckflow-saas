@@ -1,4 +1,3 @@
-cat > ~/TruckFlow/truckflow-saas/app/page.tsx << 'EOF'
 'use client';
 
 import { useState } from 'react';
