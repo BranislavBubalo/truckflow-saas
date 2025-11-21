@@ -661,4 +661,3 @@ function PricingCard({ badge, name, productName, price, priceSubtext, period, de
     </div>
   );
 }
-EOF
