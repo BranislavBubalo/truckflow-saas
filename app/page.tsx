@@ -3,196 +3,184 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-export default function FleetHubLanding() {
-  const [language, setLanguage] = useState<'en'>('en');
+export default function FleetExpediateLanding() {
   const [showRegisterModal, setShowRegisterModal] = useState(false);
 
   const content = {
-    en: {
-      nav: {
-        about: 'About',
-        features: 'Features',
-        pricing: 'Pricing',
-        contact: 'Contact',
+    nav: {
+      about: 'About',
+      features: 'Features',
+      pricing: 'Pricing',
+      blog: 'Blog',
+      contact: 'Contact',
+    },
+    hero: {
+      title: 'AI-Powered Fleet Management',
+      subtitle: 'Modern dispatch solutions for trucking companies. AI load scoring, real-time tracking, and mobile apps for drivers and owner-operators.',
+      cta: 'Get Started',
+      cta2: 'Learn More',
+    },
+    about: {
+      title: 'About FleetExpedite',
+      description: 'California-based IT company with 5 years in business, serving US trucking customers for the last 3 years. We build modern, AI-powered solutions that help trucking companies operate more efficiently.',
+    },
+    problem: {
+      title: 'Stop Overpaying for Dispatch',
+      old: {
+        title: 'Traditional Platforms',
+        points: [
+          'Manual load searching',
+          'No AI assistance',
+          'Missing profitable loads',
+          'Expensive per-truck pricing',
+          'Limited mobile features',
+        ],
       },
-      hero: {
-        title: 'AI-Powered Fleet Management',
-        subtitle: 'Modern dispatch solutions for trucking companies. AI load scoring, real-time tracking, and mobile apps for drivers and owner-operators.',
+      new: {
+        title: 'FleetExpedite Solution',
+        points: [
+          'AI Load Scoring 24/7',
+          'Automated load bidding',
+          'Real-time cost calculator',
+          'Modern mobile apps',
+          'Transparent pricing',
+        ],
+      },
+    },
+    features: {
+      title: 'Everything You Need',
+      subtitle: 'Complete fleet management solution.',
+      list: [
+        {
+          icon: '🤖',
+          title: 'AI Load Scoring',
+          description: 'Intelligent algorithm ranks 1000+ loads automatically based on profitability',
+        },
+        {
+          icon: '💰',
+          title: 'Trip Cost Calculator',
+          description: 'Real-time toll and fuel cost calculation using TollGuru and EIA data',
+        },
+        {
+          icon: '📍',
+          title: 'Real-Time GPS',
+          description: 'Track every truck on live map. Know exactly where your fleet is.',
+        },
+        {
+          icon: '📱',
+          title: 'Mobile Apps',
+          description: 'iOS apps for company drivers and owner-operators with different features.',
+        },
+        {
+          icon: '📊',
+          title: 'Analytics Dashboard',
+          description: 'Revenue reports, driver performance, load history - all in one place.',
+        },
+        {
+          icon: '💼',
+          title: 'Broker Integration',
+          description: 'Connect with DAT, Truckstop, and send rate confirmations instantly.',
+        },
+      ],
+    },
+    pricing: {
+      title: 'Flexible Pricing Options',
+      subtitle: 'Choose the solution that fits your business',
+      dispatch: {
+        name: 'Dispatch as a Service',
+        productName: 'FleetExpedite',
+        price: 'Register for',
+        priceSubtext: 'Pricing',
+        period: '',
+        desc: 'Complete dispatch platform',
+        badge: 'ENTERPRISE',
+        features: [
+          'AI Load Scoring Engine',
+          'Real-time Trip Cost Calculator',
+          'Web dashboard for dispatchers',
+          'Load management tools',
+          'Broker communication',
+          'Real-time GPS tracking',
+          'Analytics & reports',
+          'FleetExpedite Driver app included',
+        ],
+        comparison: '60% cheaper than Rose Rocket',
+        cta: 'Register Now',
+      },
+      driver: {
+        name: 'Company Driver App',
+        productName: 'FleetExpedite Driver',
+        price: '$15',
+        period: '/month',
+        desc: 'Per driver pricing',
+        badge: 'DRIVERS',
+        features: [
+          'iOS mobile app',
+          'Real-time GPS tracking',
+          'Load status updates',
+          'Direct messaging',
+          'Document upload (BOL)',
+          'Proof of delivery',
+          'Push notifications',
+          'Modern driver interface',
+        ],
+        comparison: 'Industry standard: $15-25/driver',
         cta: 'Get Started',
-        cta2: 'Learn More',
       },
-      about: {
-        title: 'About FleetHub',
-        description: 'California-based IT company with 5 years in business, serving US trucking customers for the last 3 years. We build modern, AI-powered solutions that help trucking companies operate more efficiently.',
-      },
-      problem: {
-        title: 'Stop Overpaying for Dispatch',
-        old: {
-          title: 'Traditional Platforms',
-          points: [
-            'Manual load searching',
-            'No AI assistance',
-            'Missing profitable loads',
-            'Expensive per-truck pricing',
-            'Limited mobile features',
-          ],
-        },
-        new: {
-          title: 'FleetHub Solution',
-          points: [
-            'AI Load Scoring 24/7',
-            'Automated load bidding',
-            'Real-time cost calculator',
-            'Modern mobile apps',
-            'Transparent pricing',
-          ],
-        },
-      },
-      features: {
-        title: 'Everything You Need',
-        subtitle: 'Complete fleet management solution.',
-        list: [
-          {
-            icon: '🤖',
-            title: 'AI Load Scoring',
-            description: 'Intelligent algorithm ranks 1000+ loads automatically based on profitability',
-          },
-          {
-            icon: '💰',
-            title: 'Trip Cost Calculator',
-            description: 'Real-time toll and fuel cost calculation using TollGuru and EIA data',
-          },
-          {
-            icon: '📍',
-            title: 'Real-Time GPS',
-            description: 'Track every truck on live map. Know exactly where your fleet is.',
-          },
-          {
-            icon: '📱',
-            title: 'Mobile Apps',
-            description: 'iOS apps for company drivers and owner-operators with different features.',
-          },
-          {
-            icon: '📊',
-            title: 'Analytics Dashboard',
-            description: 'Revenue reports, driver performance, load history - all in one place.',
-          },
-          {
-            icon: '💼',
-            title: 'Broker Integration',
-            description: 'Connect with DAT, Truckstop, and send rate confirmations instantly.',
-          },
+      ownerOperator: {
+        name: 'Owner-Operator App',
+        productName: 'FexPeGo',
+        price: '$120',
+        period: '/month',
+        desc: 'For independent operators',
+        badge: 'PREMIUM',
+        features: [
+          'Automated load bidding 24/7',
+          'AI-powered load matching',
+          'Real-time fuel & toll calculator',
+          'Financial management',
+          'Trip cost optimization',
+          'Direct broker integration',
+          'GPS tracking & navigation',
+          'Revenue analytics',
         ],
+        comparison: 'Complete business solution',
+        cta: 'Start Free Trial',
       },
-      pricing: {
-        title: 'Flexible Pricing Options',
-        subtitle: 'Choose the solution that fits your business',
-        dispatch: {
-          name: 'Dispatch as a Service',
-          productName: 'FleetHub',
-          price: 'Register for',
-          priceSubtext: 'Pricing',
-          period: '',
-          desc: 'Complete dispatch platform',
-          badge: 'ENTERPRISE',
-          features: [
-            'AI Load Scoring Engine',
-            'Real-time Trip Cost Calculator',
-            'Web dashboard for dispatchers',
-            'Load management tools',
-            'Broker communication',
-            'Real-time GPS tracking',
-            'Analytics & reports',
-            'FleetHub Driver app included',
-          ],
-          comparison: '60% cheaper than Rose Rocket',
-          cta: 'Register Now',
-        },
-        driver: {
-          name: 'Company Driver App',
-          productName: 'FleetHub Driver',
-          price: '$15',
-          period: '/month',
-          desc: 'Per driver pricing',
-          badge: 'DRIVERS',
-          features: [
-            'iOS mobile app',
-            'Real-time GPS tracking',
-            'Load status updates',
-            'Direct messaging',
-            'Document upload (BOL)',
-            'Proof of delivery',
-            'Push notifications',
-            'Modern driver interface',
-          ],
-          comparison: 'Industry standard: $15-25/driver',
-          cta: 'Get Started',
-        },
-        ownerOperator: {
-          name: 'Owner-Operator App',
-          productName: 'FexPeGo',
-          price: '$120',
-          period: '/month',
-          desc: 'For independent operators',
-          badge: 'PREMIUM',
-          features: [
-            'Automated load bidding 24/7',
-            'AI-powered load matching',
-            'Real-time fuel & toll calculator',
-            'Financial management',
-            'Trip cost optimization',
-            'Direct broker integration',
-            'GPS tracking & navigation',
-            'Revenue analytics',
-          ],
-          comparison: 'Complete business solution',
-          cta: 'Start Free Trial',
-        },
+    },
+    cta: {
+      title: 'Ready to Modernize Your Fleet?',
+      subtitle: 'Join trucking companies already using FleetExpedite',
+      button: 'Get Started',
+      nobind: 'Contact us for custom pricing and demos.',
+    },
+    contact: {
+      title: 'Get in Touch',
+      email: 'Email',
+      subtitle: 'Have questions? We\'re here to help.',
+    },
+    footer: {
+      tagline: 'AI-Powered Fleet Management Solutions',
+      location: 'California, USA',
+      rights: '© 2025 FleetExpedite. All rights reserved.',
+    },
+    register: {
+      title: 'Register for FleetExpedite',
+      subtitle: 'Get started with our enterprise dispatch solution',
+      fields: {
+        name: 'Full Name',
+        title: 'Job Title',
+        company: 'Company Name',
+        website: 'Company Website',
+        email: 'Company Email',
+        phone: 'Phone Number',
       },
-      savings: {
-        title: 'Enterprise Pricing',
-        subtitle: 'FleetHub scales with your business',
-        tiers: [
-          { name: 'Growth', trucks: '11-50 trucks', platform: '$1,000/mo', total: '~$1,750/mo*' },
-          { name: 'Scale', trucks: '51-200 trucks', platform: '$1,800/mo', total: '~$3,300/mo*' },
-          { name: 'Enterprise', trucks: '201-500 trucks', platform: '$3,000/mo', total: '~$6,600/mo*' },
-        ],
-        note: '*Total includes Platform Fee + Driver Apps. Volume discounts available.',
-      },
-      cta: {
-        title: 'Ready to Modernize Your Fleet?',
-        subtitle: 'Join trucking companies already using FleetHub',
-        button: 'Get Started',
-        nobind: 'Contact us for custom pricing and demos.',
-      },
-      contact: {
-        title: 'Get in Touch',
-        email: 'Email',
-        subtitle: 'Have questions? We\'re here to help.',
-      },
-      footer: {
-        tagline: 'AI-Powered Fleet Management Solutions',
-        location: 'California, USA',
-        rights: '© 2025 FleetHub. All rights reserved.',
-      },
-      register: {
-        title: 'Register for FleetHub',
-        subtitle: 'Get started with our enterprise dispatch solution',
-        fields: {
-          name: 'Full Name',
-          title: 'Job Title',
-          company: 'Company Name',
-          website: 'Company Website',
-          email: 'Company Email',
-          phone: 'Phone Number',
-        },
-        submit: 'Submit Registration',
-        cancel: 'Cancel',
-      },
+      submit: 'Submit Registration',
+      cancel: 'Cancel',
     },
   };
 
-  const t = content[language];
+  const t = content;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900">
@@ -283,10 +271,8 @@ export default function FleetHubLanding() {
                   <input
                     name="website"
                     type="text"
-                    pattern=".*\.(com|net|org|biz|info|io|co|us|uk|ca|au).*"
-                    title="Please enter a valid website (must include .com, .net, .org, etc.)"
                     className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white focus:border-blue-500 focus:outline-none"
-                    placeholder="example.com or https://example.com"
+                    placeholder="example.com"
                   />
                 </div>
                 
@@ -337,10 +323,9 @@ export default function FleetHubLanding() {
       <nav className="fixed top-0 w-full bg-black/30 backdrop-blur-xl border-b border-white/10 z-40">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <div className="text-2xl font-bold text-white flex items-center gap-3">
-            <div className="w-10 h-10 bg-gradient-to-br from-blue-400 to-blue-600 rounded-lg flex items-center justify-center text-2xl">
-              F
-            </div>
-            <span>FleetHub</span>
+        
+<img src="/logo.png" alt="FleetExpedite" className="h-12 w-auto" />
+           
           </div>
           <div className="flex items-center gap-6">
             <a href="#about" className="text-white/80 hover:text-white transition hidden md:block">
@@ -351,6 +336,9 @@ export default function FleetHubLanding() {
             </a>
             <a href="#pricing" className="text-white/80 hover:text-white transition hidden md:block">
               {t.nav.pricing}
+            </a>
+            <a href="/blog" className="text-white/80 hover:text-white transition hidden md:block">
+              {t.nav.blog}
             </a>
             <a href="#contact" className="text-white/80 hover:text-white transition hidden md:block">
               {t.nav.contact}
@@ -414,7 +402,6 @@ export default function FleetHubLanding() {
         <div className="max-w-6xl mx-auto">
           <h2 className="text-5xl font-bold text-white text-center mb-16">{t.problem.title}</h2>
           <div className="grid md:grid-cols-2 gap-8">
-            {/* Old Way */}
             <div className="bg-red-500/10 border border-red-500/30 rounded-2xl p-8">
               <div className="text-red-400 text-5xl mb-4">❌</div>
               <h3 className="text-3xl font-bold text-white mb-6">{t.problem.old.title}</h3>
@@ -427,8 +414,6 @@ export default function FleetHubLanding() {
                 ))}
               </ul>
             </div>
-
-            {/* New Way */}
             <div className="bg-green-500/10 border border-green-500/30 rounded-2xl p-8">
               <div className="text-green-400 text-5xl mb-4">✅</div>
               <h3 className="text-3xl font-bold text-white mb-6">{t.problem.new.title}</h3>
@@ -524,7 +509,7 @@ export default function FleetHubLanding() {
         </div>
       </section>
 
-      {/* Enterprise CTA with Screenshot */}
+      {/* Enterprise */}
       <section className="py-20 px-6 bg-black/20">
         <div className="max-w-6xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
@@ -562,7 +547,7 @@ export default function FleetHubLanding() {
               <div className="bg-gradient-to-br from-purple-500/10 to-blue-500/10 border border-white/10 rounded-2xl p-4 shadow-2xl">
                 <img 
                   src="/dashboard-preview.png" 
-                  alt="FleetHub Analytics Dashboard"
+                  alt="FleetExpedite Analytics Dashboard"
                   className="rounded-lg w-full"
                 />
               </div>
@@ -603,12 +588,13 @@ export default function FleetHubLanding() {
       {/* Footer */}
       <footer className="py-12 px-6 border-t border-white/10">
         <div className="max-w-7xl mx-auto text-center">
-          <div className="text-3xl font-bold text-white mb-4 flex items-center justify-center gap-3">
-            <div className="w-10 h-10 bg-gradient-to-br from-blue-400 to-blue-600 rounded-lg flex items-center justify-center text-2xl">
-              F
-            </div>
-            <span>FleetHub</span>
-          </div>
+          
+<div className="text-3xl font-bold text-white mb-4 flex items-center justify-center gap-3">
+  <img src="/logo.png" alt="FleetExpedite" className="h-12 w-auto" />
+</div>
+
+
+
           <p className="text-white/60 mb-2 text-lg">{t.footer.tagline}</p>
           <p className="text-white/50 mb-6">{t.footer.location}</p>
           <p className="text-white/40">{t.footer.rights}</p>
