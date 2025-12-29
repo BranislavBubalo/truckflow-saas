@@ -1,32 +1,32 @@
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 export async function POST(request: Request) {
+  // Inicijalizuj Resend UNUTAR funkcije
+  const resend = new Resend(process.env.RESEND_API_KEY);
+  
   try {
-    const body = await request.json();
-    const { name, title, company, website, email, phone } = body;
-
-    // Pošalji email tebi
+    const data = await request.json();
+    
     await resend.emails.send({
-      from: 'FleetHub <onboarding@resend.dev>', // Privremeno - kasnije ćemo custom domen
+      from: 'FleetExpedite <onboarding@resend.dev>',
       to: 'contact@fleetexpedite.com',
-      subject: 'New FleetHub Registration',
+      subject: 'New Registration - FleetExpedite',
       html: `
-        <h2>New Registration Request</h2>
-        <p><strong>Name:</strong> ${name}</p>
-        <p><strong>Title:</strong> ${title}</p>
-        <p><strong>Company:</strong> ${company}</p>
-        <p><strong>Website:</strong> ${website}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Phone:</strong> ${phone}</p>
-      `,
+        <h2>New Registration</h2>
+        <p><strong>Name:</strong> ${data.name}</p>
+        <p><strong>Company:</strong> ${data.company || 'N/A'}</p>
+        <p><strong>Email:</strong> ${data.email}</p>
+        <p><strong>Phone:</strong> ${data.phone}</p>
+      `
     });
-
+    
     return NextResponse.json({ success: true });
   } catch (error) {
-    console.error('Error sending email:', error);
-    return NextResponse.json({ error: 'Failed to send email' }, { status: 500 });
+    console.error('Registration error:', error);
+    return NextResponse.json(
+      { success: false, error: 'Failed to send registration' },
+      { status: 500 }
+    );
   }
 }
