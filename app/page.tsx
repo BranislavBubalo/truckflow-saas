@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
 
 export default function FleetExpediateLanding() {
   const [showRegisterModal, setShowRegisterModal] = useState(false);
@@ -110,7 +111,7 @@ export default function FleetExpediateLanding() {
       driver: {
         name: 'Company Driver App',
         productName: 'FleetExpedite Driver',
-        price: '$15',
+        price: '$12',
         period: '/month',
         desc: 'Per driver pricing',
         badge: 'DRIVERS',
@@ -126,26 +127,39 @@ export default function FleetExpediateLanding() {
         ],
         comparison: 'Industry standard: $15-25/driver',
         cta: 'Get Started',
+        link: '/driver-app',
       },
       ownerOperator: {
         name: 'Owner-Operator App',
-        productName: 'FexPeGo',
-        price: '$120',
-        period: '/month',
+        productName: 'FleetExpedite OO',
+        price: '1%',
+      
+        period: 'per load',
         desc: 'For independent operators',
-        badge: 'PREMIUM',
+        badge: '🔥 EARLY ADOPTER SPECIAL',
+        promotion: {
+          title: 'First 100 Drivers Only!',
+          highlights: [
+            '1% Commission FOR LIFE',
+            'First 30 Days: 0% Commission',
+            'Regular rate: 2.5%',
+            'Save $1,500+ per $100k revenue',
+          ],
+        },
         features: [
-          'Automated load bidding 24/7',
-          'AI-powered load matching',
-          'Real-time fuel & toll calculator',
-          'Financial management',
-          'Trip cost optimization',
-          'Direct broker integration',
-          'GPS tracking & navigation',
-          'Revenue analytics',
+          '✓ Lock in 1% rate forever (Reg: 2.5%)',
+          '✓ 30 days FREE (0% commission)',
+          '✓ 24/7 AI Load Matching',
+          '✓ Real-time fuel & toll calculator',
+          '✓ Automated load bidding',
+          '✓ Direct broker integration',
+          '✓ Keep 99% of your earnings',
+          '✓ Rate NEVER increases',
         ],
-        comparison: 'Complete business solution',
-        cta: 'Start Free Trial',
+        comparison: 'Limited to first 100 drivers - Secure your spot!',
+        cta: 'Claim Your Spot',
+        urgent: 'Only XX spots left!',
+        link: '/owner-operator-app',
       },
     },
     cta: {
@@ -323,10 +337,10 @@ export default function FleetExpediateLanding() {
       <nav className="fixed top-0 w-full bg-black/30 backdrop-blur-xl border-b border-white/10 z-40">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <div className="text-2xl font-bold text-white flex items-center gap-3">
-        
-<img src="/logo.png" alt="FleetExpedite" className="h-12 w-auto" />
-           
-          </div>
+  <span className="text-3xl font-extrabold tracking-tight">
+
+  </span>
+</div>
           <div className="flex items-center gap-6">
             <a href="#about" className="text-white/80 hover:text-white transition hidden md:block">
               {t.nav.about}
@@ -347,43 +361,91 @@ export default function FleetExpediateLanding() {
         </div>
       </nav>
 
-      {/* Hero */}
-      <section className="pt-32 pb-20 px-6">
-        <div className="max-w-6xl mx-auto text-center">
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-6xl md:text-7xl font-bold text-white mb-6 leading-tight"
-          >
-            {t.hero.title}
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="text-2xl text-white/70 mb-12 max-w-4xl mx-auto"
-          >
-            {t.hero.subtitle}
-          </motion.p>
+      {/* Hero with Truck Background - Facebook Cover Style */}
+      <section className="relative pt-0 overflow-hidden">
+        {/* Full Width Truck Image - No Padding */}
+        <div className="relative w-full h-[500px] md:h-[600px]">
+          <Image 
+            src="/images/truck-hero.jpg" 
+            alt="FleetExpedite Trucks" 
+            fill
+            className="object-cover"
+            priority
+            sizes="100vw"
+          />
+          {/* Gradient Overlay - Darker at bottom for logo visibility */}
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-slate-900/30 to-slate-900/80"></div>
+          
+          {/* Logo in Bottom Left - Facebook Style */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="flex gap-4 justify-center flex-wrap"
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.3 }}
+            className="absolute bottom-6 left-6 md:bottom-8 md:left-8 z-10"
           >
-            <button 
-              onClick={() => setShowRegisterModal(true)}
-              className="px-10 py-5 bg-blue-500 hover:bg-blue-600 rounded-xl text-white font-bold text-xl transition shadow-lg shadow-blue-500/50"
-            >
-              {t.hero.cta}
-            </button>
-            <a 
-              href="#features"
-              className="px-10 py-5 bg-white/10 hover:bg-white/20 rounded-xl text-white font-bold text-xl transition border border-white/20"
-            >
-              {t.hero.cta2}
-            </a>
+            <div className="w-36 h-36 md:w-48 md:h-48 rounded-full bg-slate-900 border-4 border-white shadow-2xl flex items-center justify-center overflow-hidden relative">
+  <Image 
+    src="/images/logo.jpg" 
+    alt="FleetExpedite Logo" 
+    fill
+    className="object-cover scale-110"
+  />
+</div>
           </motion.div>
+
+          {/* Company Name Next to Logo */}
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.4 }}
+            className="absolute bottom-12 left-44 md:bottom-16 md:left-56 hidden md:block"
+          >
+            <h1 className="text-4xl md:text-5xl font-bold text-white drop-shadow-2xl">
+              FleetExpedite
+            </h1>
+            <p className="text-white/80 text-lg drop-shadow-lg">AI-Powered Fleet Management</p>
+          </motion.div>
+        </div>
+
+        {/* Content Below Image */}
+        <div className="bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 px-6 py-20">
+          <div className="max-w-6xl mx-auto text-center">
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5 }}
+              className="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight"
+            >
+              {t.hero.title}
+            </motion.h2>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6 }}
+              className="text-2xl text-white/80 mb-12 max-w-4xl mx-auto"
+            >
+              {t.hero.subtitle}
+            </motion.p>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.7 }}
+              className="flex gap-4 justify-center flex-wrap"
+            >
+              <button 
+                onClick={() => setShowRegisterModal(true)}
+                className="px-10 py-5 bg-blue-500 hover:bg-blue-600 rounded-xl text-white font-bold text-xl transition shadow-lg shadow-blue-500/50 hover:shadow-blue-500/70 hover:scale-105 transform"
+              >
+                {t.hero.cta}
+              </button>
+              <a 
+                href="#features"
+                className="px-10 py-5 bg-white/10 hover:bg-white/20 rounded-xl text-white font-bold text-xl transition border border-white/20 backdrop-blur-sm hover:scale-105 transform"
+              >
+                {t.hero.cta2}
+              </a>
+            </motion.div>
+          </div>
         </div>
       </section>
 
@@ -476,7 +538,7 @@ export default function FleetExpediateLanding() {
               comparison={t.pricing.dispatch.comparison}
               cta={t.pricing.dispatch.cta}
               color="blue"
-              popular
+              popular={false}
               onClick={() => setShowRegisterModal(true)}
             />
             <PricingCard
@@ -491,19 +553,25 @@ export default function FleetExpediateLanding() {
               cta={t.pricing.driver.cta}
               color="green"
               onClick={() => setShowRegisterModal(true)}
+              link={t.pricing.driver.link}
             />
             <PricingCard
               badge={t.pricing.ownerOperator.badge}
               name={t.pricing.ownerOperator.name}
               productName={t.pricing.ownerOperator.productName}
               price={t.pricing.ownerOperator.price}
+              priceSubtext={t.pricing.ownerOperator.priceSubtext}
               period={t.pricing.ownerOperator.period}
               desc={t.pricing.ownerOperator.desc}
               features={t.pricing.ownerOperator.features}
               comparison={t.pricing.ownerOperator.comparison}
               cta={t.pricing.ownerOperator.cta}
-              color="purple"
+              color="orange"
+              popular={true}
+              promotion={t.pricing.ownerOperator.promotion}
+              urgent={t.pricing.ownerOperator.urgent}
               onClick={() => setShowRegisterModal(true)}
+              link={t.pricing.ownerOperator.link}
             />
           </div>
         </div>
@@ -588,13 +656,16 @@ export default function FleetExpediateLanding() {
       {/* Footer */}
       <footer className="py-12 px-6 border-t border-white/10">
         <div className="max-w-7xl mx-auto text-center">
-          
-<div className="text-3xl font-bold text-white mb-4 flex items-center justify-center gap-3">
-  <img src="/logo.png" alt="FleetExpedite" className="h-12 w-auto" />
-</div>
-
-
-
+          <div className="text-3xl font-bold text-white mb-4 flex items-center justify-center gap-3">
+            <div className="relative w-14 h-14">
+              <Image 
+                src="/images/logo.jpg" 
+                alt="FleetExpedite" 
+                fill
+                className="rounded-lg shadow-lg object-cover"
+              />
+            </div>
+          </div>
           <p className="text-white/60 mb-2 text-lg">{t.footer.tagline}</p>
           <p className="text-white/50 mb-6">{t.footer.location}</p>
           <p className="text-white/40">{t.footer.rights}</p>
@@ -604,32 +675,57 @@ export default function FleetExpediateLanding() {
   );
 }
 
-function PricingCard({ badge, name, productName, price, priceSubtext, period, desc, features, comparison, cta, color, popular, onClick }: any) {
+function PricingCard({ badge, name, productName, price, priceSubtext, period, desc, features, comparison, cta, color, popular, promotion, urgent, onClick, link }: any) {
   const colors: any = {
     blue: 'from-blue-500/20 to-blue-600/20 border-blue-500/50',
     green: 'from-green-500/20 to-green-600/20 border-green-500/50',
     purple: 'from-purple-500/20 to-purple-600/20 border-purple-500/50',
+    orange: 'from-orange-500/20 to-red-600/20 border-orange-500/50',
   };
 
   const badgeColors: any = {
     blue: 'bg-blue-500',
     green: 'bg-green-500',
     purple: 'bg-purple-500',
+    orange: 'bg-gradient-to-r from-orange-500 to-red-500',
   };
 
   return (
-    <div className={`relative bg-gradient-to-br ${colors[color]} border-2 rounded-2xl p-8 ${popular ? 'scale-105 shadow-2xl' : ''}`}>
+    <div className={`relative bg-gradient-to-br ${colors[color]} border-2 rounded-2xl p-8 ${popular ? 'scale-105 shadow-2xl ring-4 ring-orange-500/50' : ''}`}>
+      {popular && (
+        <div className="absolute -top-3 -right-3 bg-red-500 text-white px-4 py-1 rounded-full text-xs font-bold animate-pulse">
+          HOT DEAL
+        </div>
+      )}
       <div className={`absolute -top-4 left-1/2 -translate-x-1/2 px-6 py-2 ${badgeColors[color]} rounded-full text-white text-sm font-bold whitespace-nowrap`}>
         {badge}
       </div>
       <h3 className="text-2xl font-bold text-white mb-1 mt-4">{name}</h3>
       <p className="text-blue-400 font-semibold text-lg mb-2">{productName}</p>
       <p className="text-white/60 mb-6">{desc}</p>
+      
+      {promotion && (
+        <div className="bg-orange-500/20 border border-orange-500/50 rounded-xl p-4 mb-6">
+          <div className="text-orange-400 font-bold text-sm mb-2">{promotion.title}</div>
+          <ul className="space-y-1">
+            {promotion.highlights.map((highlight: string, i: number) => (
+              <li key={i} className="text-white/90 text-xs flex items-center gap-2">
+                <span className="text-orange-400">★</span>
+                {highlight}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+      
       <div className="mb-6">
         <div className="text-4xl font-bold text-white">{price}</div>
         {priceSubtext && <div className="text-2xl text-white/80 mt-1">{priceSubtext}</div>}
         {period && <div className="text-white/60 text-xl">{period}</div>}
       </div>
+      
+      
+      
       <div className="text-sm text-white/50 mb-6 italic">{comparison}</div>
       <ul className="space-y-3 mb-8">
         {features.map((feature: string, i: number) => (
@@ -641,10 +737,15 @@ function PricingCard({ badge, name, productName, price, priceSubtext, period, de
       </ul>
       <button 
         onClick={onClick}
-        className="w-full py-4 bg-white/20 hover:bg-white/30 rounded-xl text-white font-bold transition text-lg"
+        className={`w-full py-4 ${popular ? 'bg-orange-500 hover:bg-orange-600' : 'bg-white/20 hover:bg-white/30'} rounded-xl text-white font-bold transition text-lg ${popular ? 'shadow-lg shadow-orange-500/50 animate-pulse' : ''}`}
       >
         {cta}
       </button>
+      {link && (
+        <a href={link} className="block text-center text-white/60 hover:text-white text-sm mt-3 transition">
+          Learn more →
+        </a>
+      )}
     </div>
   );
 }
