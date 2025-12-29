@@ -133,7 +133,7 @@ export default function FleetExpediateLanding() {
         name: 'Owner-Operator App',
         productName: 'FleetExpedite OO',
         price: '1%',
-      
+        priceSubtext: 'Commission', 
         period: 'per load',
         desc: 'For independent operators',
         badge: '🔥 EARLY ADOPTER SPECIAL',
