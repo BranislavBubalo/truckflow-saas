@@ -9,7 +9,7 @@ export async function POST(request: Request) {
     const data = await request.json();
     
     await resend.emails.send({
-      from: 'FleetExpedite <onboarding@resend.dev>',
+    from: 'FleetExpedite <contact@fleetexpedite.com>',
       to: 'contact@fleetexpedite.com',
       subject: 'New Registration - FleetExpedite',
       html: `
