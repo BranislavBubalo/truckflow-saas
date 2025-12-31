@@ -23,28 +23,28 @@ export default function BlogEntryPage() {
   const handleImageUpload = async (file: File) => {
     setUploadingImage(true);
     try {
-      // Upload to Cloudinary or similar
       const formData = new FormData();
       formData.append('file', file);
-      formData.append('upload_preset', 'blog_images'); // Configure this in Cloudinary
 
-      const response = await fetch(
-        `https://api.cloudinary.com/v1_1/YOUR_CLOUD_NAME/image/upload`,
-        {
-          method: 'POST',
-          body: formData,
-        }
-      );
+      const response = await fetch('/api/upload', {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (!response.ok) {
+        throw new Error('Upload failed');
+      }
 
       const data = await response.json();
       const imageUrl = data.secure_url;
 
       // Insert markdown image syntax at cursor
-      const imageMarkdown = `\n![Image](${imageUrl})\n`;
+      const imageMarkdown = `\n![${file.name}](${imageUrl})\n`;
       setContent(content + imageMarkdown);
       
-      alert('Image uploaded! URL copied to editor.');
+      alert('Image uploaded successfully!');
     } catch (err) {
+      console.error('Image upload error:', err);
       alert('Failed to upload image. Please try again.');
     } finally {
       setUploadingImage(false);
@@ -184,6 +184,7 @@ export default function BlogEntryPage() {
                 }}
                 className="hidden"
                 id="image-upload"
+                disabled={uploadingImage}
               />
               <label
                 htmlFor="image-upload"
@@ -192,7 +193,7 @@ export default function BlogEntryPage() {
                 {uploadingImage ? 'Uploading...' : 'Upload Image'}
               </label>
               <p className="text-white/60 text-sm">
-                Images will be inserted as markdown
+                Images will be inserted as markdown in the editor
               </p>
             </div>
           </div>
