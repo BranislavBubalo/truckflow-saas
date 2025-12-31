@@ -5,6 +5,27 @@ const notion = new Client({
   auth: process.env.NOTION_API_KEY,
 });
 
+// Split content into chunks of 2000 characters
+function splitContent(content: string): string[] {
+  const chunks: string[] = [];
+  let currentChunk = '';
+  
+  const lines = content.split('\n');
+  
+  for (const line of lines) {
+    if ((currentChunk + line + '\n').length > 2000) {
+      if (currentChunk) chunks.push(currentChunk);
+      currentChunk = line + '\n';
+    } else {
+      currentChunk += line + '\n';
+    }
+  }
+  
+  if (currentChunk) chunks.push(currentChunk);
+  
+  return chunks;
+}
+
 export async function POST(request: Request) {
   try {
     const { title, description, content, tags, published, password } = await request.json();
@@ -21,6 +42,17 @@ export async function POST(request: Request) {
       .replace(/(^-|-$)/g, '');
 
     const databaseId = process.env.NOTION_BLOG_DATABASE_ID!;
+
+    // Split content into chunks
+    const contentChunks = splitContent(content);
+    
+    const children = contentChunks.map(chunk => ({
+      object: 'block' as const,
+      type: 'paragraph' as const,
+      paragraph: {
+        rich_text: [{ text: { content: chunk } }],
+      },
+    }));
 
     // Create page in Notion
     const response = await notion.pages.create({
@@ -45,15 +77,7 @@ export async function POST(request: Request) {
           checkbox: published,
         },
       },
-      children: [
-        {
-          object: 'block',
-          type: 'paragraph',
-          paragraph: {
-            rich_text: [{ text: { content: content } }],
-          },
-        },
-      ],
+      children: children.slice(0, 100), // Notion limit: 100 blocks per request
     });
 
     return NextResponse.json({ 
