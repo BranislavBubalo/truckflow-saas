@@ -52,7 +52,7 @@ export default function RootLayout({
     <html lang="en">
       <head>
         {/* Google Site Verification */}
-       <meta name="google-site-verification" content="lHPBpfT2mu2U33I" />
+       <meta name="google-site-verification" content="lHPBpfT2mu2U33lQgKWkyAZe8D5IdFduCHcJ1CQIebE" />
         
         {/* Google Analytics */}
         <Script
