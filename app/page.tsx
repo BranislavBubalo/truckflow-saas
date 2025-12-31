@@ -1,10 +1,30 @@
 'use client';
 
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "FleetExpedite",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Web, iOS",
+  "offers": {
+    "@type": "Offer",
+    "price": "15.00",
+    "priceCurrency": "USD",
+    "priceValidUntil": "2026-12-31"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.9",
+    "reviewCount": "127"
+  },
+  "description": "Modern AI-powered fleet management platform for trucking companies. Automated dispatch, real-time GPS tracking, and smart load matching.",
+  "url": "https://fleetexpedite.com",
+  "screenshot": "https://fleetexpedite.com/dashboard-preview.png"
+}
+
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
-
-
 
 export default function FleetExpediateLanding() {
   const [showRegisterModal, setShowRegisterModal] = useState(false);
@@ -199,481 +219,480 @@ export default function FleetExpediateLanding() {
   const t = content;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900">
-      {/* Registration Modal */}
-      <AnimatePresence>
-        {showRegisterModal && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4"
-            onClick={() => setShowRegisterModal(false)}
-          >
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
+      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900">
+        {/* Registration Modal */}
+        <AnimatePresence>
+          {showRegisterModal && (
             <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              onClick={(e) => e.stopPropagation()}
-              className="bg-slate-800 rounded-2xl p-8 max-w-md w-full border border-white/10"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+              onClick={() => setShowRegisterModal(false)}
             >
-              <h3 className="text-3xl font-bold text-white mb-2">{t.register.title}</h3>
-              <p className="text-white/60 mb-6">{t.register.subtitle}</p>
-              
-              <form className="space-y-4" onSubmit={async (e) => {
-                e.preventDefault();
-                const formData = new FormData(e.currentTarget);
-                const data = {
-                  name: formData.get('name'),
-                  title: formData.get('title'),
-                  company: formData.get('company'),
-                  website: formData.get('website'),
-                  email: formData.get('email'),
-                  phone: formData.get('phone'),
-                };
-                
-                try {
-                  const res = await fetch('/api/register', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(data),
-                  });
-                  
-                  if (res.ok) {
-                    alert('Registration submitted! We will contact you soon.');
-                    setShowRegisterModal(false);
-                  } else {
-                    alert('Failed to submit. Please try again.');
-                  }
-                } catch (error) {
-                  alert('Error submitting registration.');
-                }
-              }}>
-                <div>
-                  <label className="block text-white/80 mb-2 text-sm">{t.register.fields.name}</label>
-                  <input
-                    name="name"
-                    type="text"
-                    required
-                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white focus:border-blue-500 focus:outline-none"
-                    placeholder="John Doe"
-                  />
-                </div>
-                
-                <div>
-                  <label className="block text-white/80 mb-2 text-sm">{t.register.fields.title}</label>
-                  <input
-                    name="title"
-                    type="text"
-                    required
-                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white focus:border-blue-500 focus:outline-none"
-                    placeholder="Fleet Manager"
-                  />
-                </div>
-                
-                <div>
-                  <label className="block text-white/80 mb-2 text-sm">{t.register.fields.company}</label>
-                  <input
-                    name="company"
-                    type="text"
-                    required
-                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white focus:border-blue-500 focus:outline-none"
-                    placeholder="ABC Trucking LLC"
-                  />
-                </div>
-                
-                <div>
-                  <label className="block text-white/80 mb-2 text-sm">{t.register.fields.website}</label>
-                  <input
-                    name="website"
-                    type="text"
-                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white focus:border-blue-500 focus:outline-none"
-                    placeholder="example.com"
-                  />
-                </div>
-                
-                <div>
-                  <label className="block text-white/80 mb-2 text-sm">{t.register.fields.email}</label>
-                  <input
-                    name="email"
-                    type="email"
-                    required
-                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white focus:border-blue-500 focus:outline-none"
-                    placeholder="contact@example.com"
-                  />
-                </div>
-                
-                <div>
-                  <label className="block text-white/80 mb-2 text-sm">{t.register.fields.phone}</label>
-                  <input
-                    name="phone"
-                    type="tel"
-                    required
-                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white focus:border-blue-500 focus:outline-none"
-                    placeholder="+1 (555) 123-4567"
-                  />
-                </div>
-                
-                <div className="flex gap-4 pt-4">
-                  <button
-                    type="button"
-                    onClick={() => setShowRegisterModal(false)}
-                    className="flex-1 px-6 py-3 bg-white/10 hover:bg-white/20 rounded-lg text-white font-semibold transition"
-                  >
-                    {t.register.cancel}
-                  </button>
-                  <button
-                    type="submit"
-                    className="flex-1 px-6 py-3 bg-blue-500 hover:bg-blue-600 rounded-lg text-white font-semibold transition"
-                  >
-                    {t.register.submit}
-                  </button>
-                </div>
-              </form>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* Navigation */}
-      <nav className="fixed top-0 w-full bg-black/30 backdrop-blur-xl border-b border-white/10 z-40">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <div className="text-2xl font-bold text-white flex items-center gap-3">
-  <span className="text-3xl font-extrabold tracking-tight">
-
-  </span>
-</div>
-          <div className="flex items-center gap-6">
-            <a href="#about" className="text-white/80 hover:text-white transition hidden md:block">
-              {t.nav.about}
-            </a>
-            <a href="#features" className="text-white/80 hover:text-white transition hidden md:block">
-              {t.nav.features}
-            </a>
-            <a href="#pricing" className="text-white/80 hover:text-white transition hidden md:block">
-              {t.nav.pricing}
-            </a>
-            <a href="/blog" className="text-white/80 hover:text-white transition hidden md:block">
-              {t.nav.blog}
-            </a>
-            <a href="#contact" className="text-white/80 hover:text-white transition hidden md:block">
-              {t.nav.contact}
-            </a>
-          </div>
-        </div>
-      </nav>
-
-      {/* Hero with Truck Background - Facebook Cover Style */}
-      <section className="relative pt-0 overflow-hidden">
-        {/* Full Width Truck Image - No Padding */}
-        <div className="relative w-full h-[500px] md:h-[600px]">
-          <Image 
-            src="/images/truck-hero.jpg" 
-            alt="FleetExpedite Trucks" 
-            fill
-            className="object-cover"
-            priority
-            sizes="100vw"
-          />
-          {/* Gradient Overlay - Darker at bottom for logo visibility */}
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-slate-900/30 to-slate-900/80"></div>
-          
-          {/* Logo in Bottom Left - Facebook Style */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.3 }}
-            className="absolute bottom-6 left-6 md:bottom-8 md:left-8 z-10"
-          >
-            <div className="w-36 h-36 md:w-48 md:h-48 rounded-full bg-slate-900 border-4 border-white shadow-2xl flex items-center justify-center overflow-hidden relative">
-  <Image 
-    src="/images/logo.jpg" 
-    alt="FleetExpedite Logo" 
-    fill
-    className="object-cover scale-110"
-  />
-</div>
-          </motion.div>
-
-          {/* Company Name Next to Logo */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.4 }}
-            className="absolute bottom-12 left-44 md:bottom-16 md:left-56 hidden md:block"
-          >
-            <h1 className="text-4xl md:text-5xl font-bold text-white drop-shadow-2xl">
-              FleetExpedite
-            </h1>
-            <p className="text-white/80 text-lg drop-shadow-lg">AI-Powered Fleet Management</p>
-          </motion.div>
-        </div>
-
-        {/* Content Below Image */}
-        <div className="bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 px-6 py-20">
-          <div className="max-w-6xl mx-auto text-center">
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5 }}
-              className="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight"
-            >
-              {t.hero.title}
-            </motion.h2>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6 }}
-              className="text-2xl text-white/80 mb-12 max-w-4xl mx-auto"
-            >
-              {t.hero.subtitle}
-            </motion.p>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.7 }}
-              className="flex gap-4 justify-center flex-wrap"
-            >
-              <button 
-                onClick={() => setShowRegisterModal(true)}
-                className="px-10 py-5 bg-blue-500 hover:bg-blue-600 rounded-xl text-white font-bold text-xl transition shadow-lg shadow-blue-500/50 hover:shadow-blue-500/70 hover:scale-105 transform"
-              >
-                {t.hero.cta}
-              </button>
-              <a 
-                href="#features"
-                className="px-10 py-5 bg-white/10 hover:bg-white/20 rounded-xl text-white font-bold text-xl transition border border-white/20 backdrop-blur-sm hover:scale-105 transform"
-              >
-                {t.hero.cta2}
-              </a>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* About */}
-      <section id="about" className="py-20 px-6 bg-black/20">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-5xl font-bold text-white mb-8">{t.about.title}</h2>
-          <p className="text-2xl text-white/70 leading-relaxed">
-            {t.about.description}
-          </p>
-        </div>
-      </section>
-
-      {/* Problem/Solution */}
-      <section className="py-20 px-6">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-5xl font-bold text-white text-center mb-16">{t.problem.title}</h2>
-          <div className="grid md:grid-cols-2 gap-8">
-            <div className="bg-red-500/10 border border-red-500/30 rounded-2xl p-8">
-              <div className="text-red-400 text-5xl mb-4">❌</div>
-              <h3 className="text-3xl font-bold text-white mb-6">{t.problem.old.title}</h3>
-              <ul className="space-y-4">
-                {t.problem.old.points.map((point: string, i: number) => (
-                  <li key={i} className="flex items-start gap-3 text-white/80 text-lg">
-                    <span className="text-red-400 mt-1">•</span>
-                    {point}
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="bg-green-500/10 border border-green-500/30 rounded-2xl p-8">
-              <div className="text-green-400 text-5xl mb-4">✅</div>
-              <h3 className="text-3xl font-bold text-white mb-6">{t.problem.new.title}</h3>
-              <ul className="space-y-4">
-                {t.problem.new.points.map((point: string, i: number) => (
-                  <li key={i} className="flex items-start gap-3 text-white/80 text-lg">
-                    <span className="text-green-400 mt-1">✓</span>
-                    {point}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Features */}
-      <section id="features" className="py-20 px-6 bg-black/20">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-5xl font-bold text-white mb-4">{t.features.title}</h2>
-            <p className="text-2xl text-white/60">{t.features.subtitle}</p>
-          </div>
-          <div className="grid md:grid-cols-3 gap-8">
-            {t.features.list.map((feature: any, i: number) => (
               <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="bg-white/5 border border-white/10 rounded-2xl p-8 hover:bg-white/10 transition"
+                initial={{ scale: 0.9, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.9, opacity: 0 }}
+                onClick={(e) => e.stopPropagation()}
+                className="bg-slate-800 rounded-2xl p-8 max-w-md w-full border border-white/10"
               >
-                <div className="text-5xl mb-4">{feature.icon}</div>
-                <h3 className="text-2xl font-bold text-white mb-3">{feature.title}</h3>
-                <p className="text-white/70 text-lg">{feature.description}</p>
+                <h3 className="text-3xl font-bold text-white mb-2">{t.register.title}</h3>
+                <p className="text-white/60 mb-6">{t.register.subtitle}</p>
+                
+                <form className="space-y-4" onSubmit={async (e) => {
+                  e.preventDefault();
+                  const formData = new FormData(e.currentTarget);
+                  const data = {
+                    name: formData.get('name'),
+                    title: formData.get('title'),
+                    company: formData.get('company'),
+                    website: formData.get('website'),
+                    email: formData.get('email'),
+                    phone: formData.get('phone'),
+                  };
+                  
+                  try {
+                    const res = await fetch('/api/register', {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify(data),
+                    });
+                    
+                    if (res.ok) {
+                      alert('Registration submitted! We will contact you soon.');
+                      setShowRegisterModal(false);
+                    } else {
+                      alert('Failed to submit. Please try again.');
+                    }
+                  } catch (error) {
+                    alert('Error submitting registration.');
+                  }
+                }}>
+                  <div>
+                    <label className="block text-white/80 mb-2 text-sm">{t.register.fields.name}</label>
+                    <input
+                      name="name"
+                      type="text"
+                      required
+                      className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white focus:border-blue-500 focus:outline-none"
+                      placeholder="John Doe"
+                    />
+                  </div>
+                  
+                  <div>
+                    <label className="block text-white/80 mb-2 text-sm">{t.register.fields.title}</label>
+                    <input
+                      name="title"
+                      type="text"
+                      required
+                      className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white focus:border-blue-500 focus:outline-none"
+                      placeholder="Fleet Manager"
+                    />
+                  </div>
+                  
+                  <div>
+                    <label className="block text-white/80 mb-2 text-sm">{t.register.fields.company}</label>
+                    <input
+                      name="company"
+                      type="text"
+                      required
+                      className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white focus:border-blue-500 focus:outline-none"
+                      placeholder="ABC Trucking LLC"
+                    />
+                  </div>
+                  
+                  <div>
+                    <label className="block text-white/80 mb-2 text-sm">{t.register.fields.website}</label>
+                    <input
+                      name="website"
+                      type="text"
+                      className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white focus:border-blue-500 focus:outline-none"
+                      placeholder="example.com"
+                    />
+                  </div>
+                  
+                  <div>
+                    <label className="block text-white/80 mb-2 text-sm">{t.register.fields.email}</label>
+                    <input
+                      name="email"
+                      type="email"
+                      required
+                      className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white focus:border-blue-500 focus:outline-none"
+                      placeholder="contact@example.com"
+                    />
+                  </div>
+                  
+                  <div>
+                    <label className="block text-white/80 mb-2 text-sm">{t.register.fields.phone}</label>
+                    <input
+                      name="phone"
+                      type="tel"
+                      required
+                      className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white focus:border-blue-500 focus:outline-none"
+                      placeholder="+1 (555) 123-4567"
+                    />
+                  </div>
+                  
+                  <div className="flex gap-4 pt-4">
+                    <button
+                      type="button"
+                      onClick={() => setShowRegisterModal(false)}
+                      className="flex-1 px-6 py-3 bg-white/10 hover:bg-white/20 rounded-lg text-white font-semibold transition"
+                    >
+                      {t.register.cancel}
+                    </button>
+                    <button
+                      type="submit"
+                      className="flex-1 px-6 py-3 bg-blue-500 hover:bg-blue-600 rounded-lg text-white font-semibold transition"
+                    >
+                      {t.register.submit}
+                    </button>
+                  </div>
+                </form>
               </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
-      {/* Pricing */}
-      <section id="pricing" className="py-20 px-6">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-5xl font-bold text-white mb-4">{t.pricing.title}</h2>
-            <p className="text-2xl text-white/60">{t.pricing.subtitle}</p>
-          </div>
-          <div className="grid md:grid-cols-3 gap-8">
-            <PricingCard
-              badge={t.pricing.dispatch.badge}
-              name={t.pricing.dispatch.name}
-              productName={t.pricing.dispatch.productName}
-              price={t.pricing.dispatch.price}
-              priceSubtext={t.pricing.dispatch.priceSubtext}
-              period={t.pricing.dispatch.period}
-              desc={t.pricing.dispatch.desc}
-              features={t.pricing.dispatch.features}
-              comparison={t.pricing.dispatch.comparison}
-              cta={t.pricing.dispatch.cta}
-              color="blue"
-              popular={false}
-              onClick={() => setShowRegisterModal(true)}
-            />
-            <PricingCard
-              badge={t.pricing.driver.badge}
-              name={t.pricing.driver.name}
-              productName={t.pricing.driver.productName}
-              price={t.pricing.driver.price}
-              period={t.pricing.driver.period}
-              desc={t.pricing.driver.desc}
-              features={t.pricing.driver.features}
-              comparison={t.pricing.driver.comparison}
-              cta={t.pricing.driver.cta}
-              color="green"
-              onClick={() => setShowRegisterModal(true)}
-              link={t.pricing.driver.link}
-            />
-            <PricingCard
-              badge={t.pricing.ownerOperator.badge}
-              name={t.pricing.ownerOperator.name}
-              productName={t.pricing.ownerOperator.productName}
-              price={t.pricing.ownerOperator.price}
-              priceSubtext={t.pricing.ownerOperator.priceSubtext}
-              period={t.pricing.ownerOperator.period}
-              desc={t.pricing.ownerOperator.desc}
-              features={t.pricing.ownerOperator.features}
-              comparison={t.pricing.ownerOperator.comparison}
-              cta={t.pricing.ownerOperator.cta}
-              color="orange"
-              popular={true}
-              promotion={t.pricing.ownerOperator.promotion}
-              urgent={t.pricing.ownerOperator.urgent}
-              onClick={() => setShowRegisterModal(true)}
-              link={t.pricing.ownerOperator.link}
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* Enterprise */}
-      <section className="py-20 px-6 bg-black/20">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="text-5xl font-bold text-white mb-6">Enterprise Solutions</h2>
-              <p className="text-2xl text-white/70 mb-6">
-                For fleets with 50+ trucks, we offer custom pricing, dedicated support, and advanced analytics.
-              </p>
-              <ul className="space-y-4 mb-8">
-                <li className="flex items-center gap-3 text-white/80 text-lg">
-                  <span className="text-green-400">✓</span>
-                  <span>Custom pricing & volume discounts</span>
-                </li>
-                <li className="flex items-center gap-3 text-white/80 text-lg">
-                  <span className="text-green-400">✓</span>
-                  <span>Dedicated account manager</span>
-                </li>
-                <li className="flex items-center gap-3 text-white/80 text-lg">
-                  <span className="text-green-400">✓</span>
-                  <span>Priority support & onboarding</span>
-                </li>
-                <li className="flex items-center gap-3 text-white/80 text-lg">
-                  <span className="text-green-400">✓</span>
-                  <span>Advanced analytics & reporting</span>
-                </li>
-              </ul>
-              <button 
-                onClick={() => setShowRegisterModal(true)}
-                className="px-10 py-5 bg-blue-500 hover:bg-blue-600 rounded-xl text-white font-bold text-xl transition shadow-lg"
-              >
-                Contact Sales
-              </button>
+        {/* Navigation */}
+        <nav className="fixed top-0 w-full bg-black/30 backdrop-blur-xl border-b border-white/10 z-40">
+          <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+            <div className="text-2xl font-bold text-white flex items-center gap-3">
+              <span className="text-3xl font-extrabold tracking-tight"></span>
             </div>
-            <div className="relative">
-              <div className="bg-gradient-to-br from-purple-500/10 to-blue-500/10 border border-white/10 rounded-2xl p-4 shadow-2xl">
-                <img 
-                  src="/dashboard-preview.png" 
-                  alt="FleetExpedite Analytics Dashboard"
-                  className="rounded-lg w-full"
+            <div className="flex items-center gap-6">
+              <a href="#about" className="text-white/80 hover:text-white transition hidden md:block">
+                {t.nav.about}
+              </a>
+              <a href="#features" className="text-white/80 hover:text-white transition hidden md:block">
+                {t.nav.features}
+              </a>
+              <a href="#pricing" className="text-white/80 hover:text-white transition hidden md:block">
+                {t.nav.pricing}
+              </a>
+              <a href="/blog" className="text-white/80 hover:text-white transition hidden md:block">
+                {t.nav.blog}
+              </a>
+              <a href="#contact" className="text-white/80 hover:text-white transition hidden md:block">
+                {t.nav.contact}
+              </a>
+            </div>
+          </div>
+        </nav>
+
+        {/* Hero with Truck Background */}
+        <section className="relative pt-0 overflow-hidden">
+          <div className="relative w-full h-[500px] md:h-[600px]">
+            <Image 
+              src="/images/truck-hero.jpg" 
+              alt="FleetExpedite Trucks" 
+              fill
+              className="object-cover"
+              priority
+              sizes="100vw"
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-slate-900/30 to-slate-900/80"></div>
+            
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.3 }}
+              className="absolute bottom-6 left-6 md:bottom-8 md:left-8 z-10"
+            >
+              <div className="w-36 h-36 md:w-48 md:h-48 rounded-full bg-slate-900 border-4 border-white shadow-2xl flex items-center justify-center overflow-hidden relative">
+                <Image 
+                  src="/images/logo.jpg" 
+                  alt="FleetExpedite Logo" 
+                  fill
+                  className="object-cover scale-110"
                 />
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.4 }}
+              className="absolute bottom-12 left-44 md:bottom-16 md:left-56 hidden md:block"
+            >
+              <h1 className="text-4xl md:text-5xl font-bold text-white drop-shadow-2xl">
+                FleetExpedite
+              </h1>
+              <p className="text-white/80 text-lg drop-shadow-lg">AI-Powered Fleet Management</p>
+            </motion.div>
+          </div>
+
+          <div className="bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 px-6 py-20">
+            <div className="max-w-6xl mx-auto text-center">
+              <motion.h2
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5 }}
+                className="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight"
+              >
+                {t.hero.title}
+              </motion.h2>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.6 }}
+                className="text-2xl text-white/80 mb-12 max-w-4xl mx-auto"
+              >
+                {t.hero.subtitle}
+              </motion.p>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.7 }}
+                className="flex gap-4 justify-center flex-wrap"
+              >
+                <button 
+                  onClick={() => setShowRegisterModal(true)}
+                  className="px-10 py-5 bg-blue-500 hover:bg-blue-600 rounded-xl text-white font-bold text-xl transition shadow-lg shadow-blue-500/50 hover:shadow-blue-500/70 hover:scale-105 transform"
+                >
+                  {t.hero.cta}
+                </button>
+                <a 
+                  href="#features"
+                  className="px-10 py-5 bg-white/10 hover:bg-white/20 rounded-xl text-white font-bold text-xl transition border border-white/20 backdrop-blur-sm hover:scale-105 transform"
+                >
+                  {t.hero.cta2}
+                </a>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
+        {/* About */}
+        <section id="about" className="py-20 px-6 bg-black/20">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-5xl font-bold text-white mb-8">{t.about.title}</h2>
+            <p className="text-2xl text-white/70 leading-relaxed">
+              {t.about.description}
+            </p>
+          </div>
+        </section>
+
+        {/* Problem/Solution */}
+        <section className="py-20 px-6">
+          <div className="max-w-6xl mx-auto">
+            <h2 className="text-5xl font-bold text-white text-center mb-16">{t.problem.title}</h2>
+            <div className="grid md:grid-cols-2 gap-8">
+              <div className="bg-red-500/10 border border-red-500/30 rounded-2xl p-8">
+                <div className="text-red-400 text-5xl mb-4">❌</div>
+                <h3 className="text-3xl font-bold text-white mb-6">{t.problem.old.title}</h3>
+                <ul className="space-y-4">
+                  {t.problem.old.points.map((point: string, i: number) => (
+                    <li key={i} className="flex items-start gap-3 text-white/80 text-lg">
+                      <span className="text-red-400 mt-1">•</span>
+                      {point}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="bg-green-500/10 border border-green-500/30 rounded-2xl p-8">
+                <div className="text-green-400 text-5xl mb-4">✅</div>
+                <h3 className="text-3xl font-bold text-white mb-6">{t.problem.new.title}</h3>
+                <ul className="space-y-4">
+                  {t.problem.new.points.map((point: string, i: number) => (
+                    <li key={i} className="flex items-start gap-3 text-white/80 text-lg">
+                      <span className="text-green-400 mt-1">✓</span>
+                      {point}
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* CTA */}
-      <section className="py-20 px-6 bg-gradient-to-r from-blue-600 to-purple-600">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-5xl font-bold text-white mb-6">{t.cta.title}</h2>
-          <p className="text-2xl text-white/90 mb-8">{t.cta.subtitle}</p>
-          <button 
-            onClick={() => setShowRegisterModal(true)}
-            className="px-12 py-5 bg-white hover:bg-gray-100 rounded-xl text-blue-600 font-bold text-xl transition shadow-2xl"
-          >
-            {t.cta.button}
-          </button>
-          <p className="text-white/70 mt-6">{t.cta.nobind}</p>
-        </div>
-      </section>
-
-      {/* Contact */}
-      <section id="contact" className="py-20 px-6">
-        <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-4xl font-bold text-white mb-6">{t.contact.title}</h2>
-          <p className="text-xl text-white/60 mb-8">{t.contact.subtitle}</p>
-          <div>
-            <div className="text-white/60 mb-2 text-lg">{t.contact.email}</div>
-            <a href="mailto:contact@fleetexpedite.com" className="text-3xl text-blue-400 hover:text-blue-300 transition font-bold">
-              contact@fleetexpedite.com
-            </a>
+        {/* Features */}
+        <section id="features" className="py-20 px-6 bg-black/20">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-16">
+              <h2 className="text-5xl font-bold text-white mb-4">{t.features.title}</h2>
+              <p className="text-2xl text-white/60">{t.features.subtitle}</p>
+            </div>
+            <div className="grid md:grid-cols-3 gap-8">
+              {t.features.list.map((feature: any, i: number) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1 }}
+                  className="bg-white/5 border border-white/10 rounded-2xl p-8 hover:bg-white/10 transition"
+                >
+                  <div className="text-5xl mb-4">{feature.icon}</div>
+                  <h3 className="text-2xl font-bold text-white mb-3">{feature.title}</h3>
+                  <p className="text-white/70 text-lg">{feature.description}</p>
+                </motion.div>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Footer */}
-      <footer className="py-12 px-6 border-t border-white/10">
-        <div className="max-w-7xl mx-auto text-center">
-          <div className="text-3xl font-bold text-white mb-4 flex items-center justify-center gap-3">
-            <div className="relative w-14 h-14">
-              <Image 
-                src="/images/logo.jpg" 
-                alt="FleetExpedite" 
-                fill
-                className="rounded-lg shadow-lg object-cover"
+        {/* Pricing */}
+        <section id="pricing" className="py-20 px-6">
+          <div className="max-w-7xl mx-auto">
+            <div className="text-center mb-16">
+              <h2 className="text-5xl font-bold text-white mb-4">{t.pricing.title}</h2>
+              <p className="text-2xl text-white/60">{t.pricing.subtitle}</p>
+            </div>
+            <div className="grid md:grid-cols-3 gap-8">
+              <PricingCard
+                badge={t.pricing.dispatch.badge}
+                name={t.pricing.dispatch.name}
+                productName={t.pricing.dispatch.productName}
+                price={t.pricing.dispatch.price}
+                priceSubtext={t.pricing.dispatch.priceSubtext}
+                period={t.pricing.dispatch.period}
+                desc={t.pricing.dispatch.desc}
+                features={t.pricing.dispatch.features}
+                comparison={t.pricing.dispatch.comparison}
+                cta={t.pricing.dispatch.cta}
+                color="blue"
+                popular={false}
+                onClick={() => setShowRegisterModal(true)}
+              />
+              <PricingCard
+                badge={t.pricing.driver.badge}
+                name={t.pricing.driver.name}
+                productName={t.pricing.driver.productName}
+                price={t.pricing.driver.price}
+                period={t.pricing.driver.period}
+                desc={t.pricing.driver.desc}
+                features={t.pricing.driver.features}
+                comparison={t.pricing.driver.comparison}
+                cta={t.pricing.driver.cta}
+                color="green"
+                onClick={() => setShowRegisterModal(true)}
+                link={t.pricing.driver.link}
+              />
+              <PricingCard
+                badge={t.pricing.ownerOperator.badge}
+                name={t.pricing.ownerOperator.name}
+                productName={t.pricing.ownerOperator.productName}
+                price={t.pricing.ownerOperator.price}
+                priceSubtext={t.pricing.ownerOperator.priceSubtext}
+                period={t.pricing.ownerOperator.period}
+                desc={t.pricing.ownerOperator.desc}
+                features={t.pricing.ownerOperator.features}
+                comparison={t.pricing.ownerOperator.comparison}
+                cta={t.pricing.ownerOperator.cta}
+                color="orange"
+                popular={true}
+                promotion={t.pricing.ownerOperator.promotion}
+                urgent={t.pricing.ownerOperator.urgent}
+                onClick={() => setShowRegisterModal(true)}
+                link={t.pricing.ownerOperator.link}
               />
             </div>
           </div>
-          <p className="text-white/60 mb-2 text-lg">{t.footer.tagline}</p>
-          <p className="text-white/50 mb-6">{t.footer.location}</p>
-          <p className="text-white/40">{t.footer.rights}</p>
-        </div>
-      </footer>
-    </div>
+        </section>
+
+        {/* Enterprise */}
+        <section className="py-20 px-6 bg-black/20">
+          <div className="max-w-6xl mx-auto">
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+              <div>
+                <h2 className="text-5xl font-bold text-white mb-6">Enterprise Solutions</h2>
+                <p className="text-2xl text-white/70 mb-6">
+                  For fleets with 50+ trucks, we offer custom pricing, dedicated support, and advanced analytics.
+                </p>
+                <ul className="space-y-4 mb-8">
+                  <li className="flex items-center gap-3 text-white/80 text-lg">
+                    <span className="text-green-400">✓</span>
+                    <span>Custom pricing & volume discounts</span>
+                  </li>
+                  <li className="flex items-center gap-3 text-white/80 text-lg">
+                    <span className="text-green-400">✓</span>
+                    <span>Dedicated account manager</span>
+                  </li>
+                  <li className="flex items-center gap-3 text-white/80 text-lg">
+                    <span className="text-green-400">✓</span>
+                    <span>Priority support & onboarding</span>
+                  </li>
+                  <li className="flex items-center gap-3 text-white/80 text-lg">
+                    <span className="text-green-400">✓</span>
+                    <span>Advanced analytics & reporting</span>
+                  </li>
+                </ul>
+                <button 
+                  onClick={() => setShowRegisterModal(true)}
+                  className="px-10 py-5 bg-blue-500 hover:bg-blue-600 rounded-xl text-white font-bold text-xl transition shadow-lg"
+                >
+                  Contact Sales
+                </button>
+              </div>
+              <div className="relative">
+                <div className="bg-gradient-to-br from-purple-500/10 to-blue-500/10 border border-white/10 rounded-2xl p-4 shadow-2xl">
+                  <img 
+                    src="/dashboard-preview.png" 
+                    alt="FleetExpedite Analytics Dashboard"
+                    className="rounded-lg w-full"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* CTA */}
+        <section className="py-20 px-6 bg-gradient-to-r from-blue-600 to-purple-600">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-5xl font-bold text-white mb-6">{t.cta.title}</h2>
+            <p className="text-2xl text-white/90 mb-8">{t.cta.subtitle}</p>
+            <button 
+              onClick={() => setShowRegisterModal(true)}
+              className="px-12 py-5 bg-white hover:bg-gray-100 rounded-xl text-blue-600 font-bold text-xl transition shadow-2xl"
+            >
+              {t.cta.button}
+            </button>
+            <p className="text-white/70 mt-6">{t.cta.nobind}</p>
+          </div>
+        </section>
+
+        {/* Contact */}
+        <section id="contact" className="py-20 px-6">
+          <div className="max-w-3xl mx-auto text-center">
+            <h2 className="text-4xl font-bold text-white mb-6">{t.contact.title}</h2>
+            <p className="text-xl text-white/60 mb-8">{t.contact.subtitle}</p>
+            <div>
+              <div className="text-white/60 mb-2 text-lg">{t.contact.email}</div>
+              <a href="mailto:contact@fleetexpedite.com" className="text-3xl text-blue-400 hover:text-blue-300 transition font-bold">
+                contact@fleetexpedite.com
+              </a>
+            </div>
+          </div>
+        </section>
+
+        {/* Footer */}
+        <footer className="py-12 px-6 border-t border-white/10">
+          <div className="max-w-7xl mx-auto text-center">
+            <div className="text-3xl font-bold text-white mb-4 flex items-center justify-center gap-3">
+              <div className="relative w-14 h-14">
+                <Image 
+                  src="/images/logo.jpg" 
+                  alt="FleetExpedite" 
+                  fill
+                  className="rounded-lg shadow-lg object-cover"
+                />
+              </div>
+            </div>
+            <p className="text-white/60 mb-2 text-lg">{t.footer.tagline}</p>
+            <p className="text-white/50 mb-6">{t.footer.location}</p>
+            <p className="text-white/40">{t.footer.rights}</p>
+          </div>
+        </footer>
+      </div>
+    </>
   );
 }
 
@@ -725,8 +744,6 @@ function PricingCard({ badge, name, productName, price, priceSubtext, period, de
         {priceSubtext && <div className="text-2xl text-white/80 mt-1">{priceSubtext}</div>}
         {period && <div className="text-white/60 text-xl">{period}</div>}
       </div>
-      
-      
       
       <div className="text-sm text-white/50 mb-6 italic">{comparison}</div>
       <ul className="space-y-3 mb-8">
