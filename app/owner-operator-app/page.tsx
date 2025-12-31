@@ -4,6 +4,8 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 
+
+
 export default function EarlyAdopterPage() {
   const [showRegisterModal, setShowRegisterModal] = useState(false);
   const [spotsLeft] = useState(73); // Update this manually or connect to DB
