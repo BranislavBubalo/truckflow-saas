@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     "dispatch software",
     "AI fleet management"
   ],
-verification: {
+  verification: {
     google: "lHPBpfT2mu2U33lQgKWkyAZe8D5IdFduCHcJ1CQIebE",
   },
   openGraph: {
@@ -51,6 +51,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        {/* Google Site Verification */}
+        <meta name="google-site-verification" content="lHPBpfT2mu2U33lQgKWkyAZe8D5IdFduCHcJ1CQIebE" />
+        
+        {/* Google Analytics */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-0XBRKFWYZ4"
           strategy="afterInteractive"
@@ -63,25 +67,11 @@ export default function RootLayout({
             gtag('config', 'G-0XBRKFWYZ4');
           `}
         </Script>
-     <head>
-  {/* Google Site Verification */}
-  <meta name="google-site-verification" content="lHPBpfT2mu2U33lQgKWkyAZe8D5IdFduCHcJ1CQIebE" />
-  
-  {/* Google Analytics */}
-  <Script
-    src="https://www.googletagmanager.com/gtag/js?id=G-0XBRKFWYZ4"
-    strategy="afterInteractive"
-  />
-  <Script id="google-analytics" strategy="afterInteractive">
-    {`
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-0XBRKFWYZ4');
-    `}
-  </Script>
-</head>
-<body>
-  {children}
-  <Analytics />
-</body>
+      </head>
+      <body>
+        {children}
+        <Analytics />
+      </body>
+    </html>
+  );
+}
