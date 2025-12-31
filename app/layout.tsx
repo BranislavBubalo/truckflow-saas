@@ -21,6 +21,9 @@ export const metadata: Metadata = {
     "dispatch software",
     "AI fleet management"
   ],
+verification: {
+    google: "lHPBpfT2mu2U33lQgKWkyAZe8D5IdFduCHcJ1CQIebE",
+  },
   openGraph: {
     type: "website",
     locale: "en_US",
