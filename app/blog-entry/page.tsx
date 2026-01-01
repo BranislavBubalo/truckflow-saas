@@ -18,38 +18,6 @@ export default function BlogEntryPage() {
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const [uploadingImage, setUploadingImage] = useState(false);
-
-  const handleImageUpload = async (file: File) => {
-    setUploadingImage(true);
-    try {
-      const formData = new FormData();
-      formData.append('file', file);
-
-      const response = await fetch('/api/upload', {
-        method: 'POST',
-        body: formData,
-      });
-
-      if (!response.ok) {
-        throw new Error('Upload failed');
-      }
-
-      const data = await response.json();
-      const imageUrl = data.secure_url;
-
-      // Insert markdown image syntax at cursor
-      const imageMarkdown = `\n![${file.name}](${imageUrl})\n`;
-      setContent(content + imageMarkdown);
-      
-      alert('Image uploaded successfully!');
-    } catch (err) {
-      console.error('Image upload error:', err);
-      alert('Failed to upload image. Please try again.');
-    } finally {
-      setUploadingImage(false);
-    }
-  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -64,7 +32,7 @@ export default function BlogEntryPage() {
           title,
           description,
           content,
-          tags: tags.split(',').map(t => t.trim()).filter(Boolean),
+          tags,
           published,
           password,
         }),
@@ -73,11 +41,10 @@ export default function BlogEntryPage() {
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.error || 'Failed to create post');
+        throw new Error(data.error || 'Failed to create blog post');
       }
 
-      alert(`Blog post created successfully! Slug: ${data.slug}`);
-      router.push(`/blog/${data.slug}`);
+      router.push('/blog');
     } catch (err: any) {
       setError(err.message);
     } finally {
@@ -86,12 +53,12 @@ export default function BlogEntryPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 py-12 px-6">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 px-6 py-16">
       <div className="max-w-4xl mx-auto">
         <div className="flex items-center justify-between mb-8">
           <h1 className="text-4xl font-bold text-white">Create Blog Post</h1>
-          <Link 
-            href="/blog" 
+          <Link
+            href="/blog"
             className="text-blue-400 hover:text-blue-300 transition"
           >
             ← Back to Blog
@@ -99,7 +66,7 @@ export default function BlogEntryPage() {
         </div>
 
         {error && (
-          <div className="bg-red-500/20 border border-red-500 rounded-xl p-4 mb-6 text-white">
+          <div className="mb-6 p-4 bg-red-500/20 border border-red-500 rounded-xl text-red-200">
             {error}
           </div>
         )}
@@ -133,11 +100,6 @@ export default function BlogEntryPage() {
               className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/40 focus:border-blue-500 focus:outline-none"
               placeholder="Blog post title"
             />
-            {title && (
-              <p className="text-white/60 text-sm mt-2">
-                Slug: {title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}
-              </p>
-            )}
           </div>
 
           {/* Description */}
@@ -169,80 +131,63 @@ export default function BlogEntryPage() {
             />
           </div>
 
-          {/* Image Upload */}
-          <div>
-            <label className="block text-white mb-2 font-semibold">
-              Upload Image
-            </label>
-            <div className="flex items-center gap-4">
-              <input
-                type="file"
-                accept="image/*"
-                onChange={(e) => {
-                  const file = e.target.files?.[0];
-                  if (file) handleImageUpload(file);
-                }}
-                className="hidden"
-                id="image-upload"
-                disabled={uploadingImage}
-              />
-              <label
-                htmlFor="image-upload"
-                className={`px-6 py-3 bg-blue-500 hover:bg-blue-600 rounded-xl text-white font-semibold cursor-pointer transition ${uploadingImage ? 'opacity-50 cursor-not-allowed' : ''}`}
-              >
-                {uploadingImage ? 'Uploading...' : 'Upload Image'}
-              </label>
-              <p className="text-white/60 text-sm">
-                Images will be inserted as markdown in the editor
-              </p>
-            </div>
-          </div>
-
           {/* Content Editor */}
           <div>
             <label className="block text-white mb-2 font-semibold">
               Content (Markdown) *
             </label>
-            <div className="bg-white rounded-xl overflow-hidden">
+            <p className="text-white/60 text-sm mb-2">
+              For images, upload them to <code className="bg-white/10 px-2 py-1 rounded">/public/blog-images/</code> and use: <code className="bg-white/10 px-2 py-1 rounded">![alt text](/blog-images/image.jpg)</code>
+            </p>
+            <div className="bg-white/10 border border-white/20 rounded-xl overflow-hidden">
               <SimpleMDE
                 value={content}
-                onChange={setContent}
+                onChange={(value) => setContent(value)}
                 options={{
                   spellChecker: false,
-                  placeholder: 'Write your blog post content in markdown...',
-                  minHeight: '400px',
+                  placeholder: 'Write your blog post content in Markdown...',
+                  status: false,
                   toolbar: [
-                    'bold', 'italic', 'heading', '|',
-                    'quote', 'unordered-list', 'ordered-list', '|',
-                    'link', 'image', '|',
-                    'preview', 'side-by-side', 'fullscreen', '|',
-                    'guide'
+                    'bold',
+                    'italic',
+                    'heading',
+                    '|',
+                    'quote',
+                    'unordered-list',
+                    'ordered-list',
+                    '|',
+                    'link',
+                    'image',
+                    '|',
+                    'preview',
+                    'side-by-side',
+                    'fullscreen',
                   ],
                 }}
               />
             </div>
           </div>
 
-          {/* Published */}
+          {/* Published Toggle */}
           <div className="flex items-center gap-3">
             <input
               type="checkbox"
               id="published"
               checked={published}
               onChange={(e) => setPublished(e.target.checked)}
-              className="w-5 h-5"
+              className="w-5 h-5 rounded border-white/20 bg-white/10 text-blue-500 focus:ring-blue-500"
             />
             <label htmlFor="published" className="text-white font-semibold">
               Publish immediately
             </label>
           </div>
 
-          {/* Submit */}
+          {/* Submit Buttons */}
           <div className="flex gap-4">
             <button
               type="submit"
               disabled={loading}
-              className={`flex-1 px-8 py-4 bg-blue-500 hover:bg-blue-600 rounded-xl text-white font-bold text-lg transition ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
+              className="px-8 py-4 bg-blue-500 hover:bg-blue-600 rounded-xl text-white font-bold transition disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {loading ? 'Creating...' : 'Create Blog Post'}
             </button>
