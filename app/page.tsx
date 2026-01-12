@@ -1,5 +1,10 @@
 'use client';
 
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
+
+// Structured Data for SEO
 const structuredData = {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
@@ -17,14 +22,18 @@ const structuredData = {
     "ratingValue": "4.9",
     "reviewCount": "127"
   },
-  "description": "Modern AI-powered fleet management platform for trucking companies. Automated dispatch, real-time GPS tracking, and smart load matching.",
+  "description": "AI-powered fleet management software for trucking companies. Automated dispatch, real-time GPS tracking, smart load matching, and mobile apps for drivers. Modern fleet management platform with AI load scoring and trip cost calculator.",
   "url": "https://fleetexpedite.com",
-  "screenshot": "https://fleetexpedite.com/dashboard-preview.png"
-}
-
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import Image from 'next/image';
+  "screenshot": "https://fleetexpedite.com/dashboard-preview.png",
+  "featureList": [
+    "AI Load Scoring Engine",
+    "Real-time GPS Tracking",
+    "Trip Cost Calculator",
+    "Mobile Apps for Drivers",
+    "Automated Dispatch",
+    "Analytics Dashboard"
+  ]
+};
 
 export default function FleetExpediateLanding() {
   const [showRegisterModal, setShowRegisterModal] = useState(false);
@@ -38,71 +47,71 @@ export default function FleetExpediateLanding() {
       contact: 'Contact',
     },
     hero: {
-      title: 'AI-Powered Fleet Management',
-      subtitle: 'Modern dispatch solutions for trucking companies. AI load scoring, real-time tracking, and mobile apps for drivers and owner-operators.',
+      title: 'AI-Powered Fleet Management Software for Trucking Companies',
+      subtitle: 'Modern dispatch software with AI load scoring, real-time GPS tracking, and mobile apps for drivers and owner-operators. Streamline your fleet operations with intelligent automation.',
       cta: 'Get Started',
       cta2: 'Learn More',
     },
     about: {
       title: 'About FleetExpedite',
-      description: 'California-based IT company with 5 years in business, serving US trucking customers for the last 3 years. We build modern, AI-powered solutions that help trucking companies operate more efficiently.',
+      description: 'California-based IT company with 5 years in business, serving US trucking customers for the last 3 years. We build modern, AI-powered fleet management solutions that help trucking companies operate more efficiently and profitably.',
     },
     problem: {
-      title: 'Stop Overpaying for Dispatch',
+      title: 'Stop Overpaying for Fleet Management Software',
       old: {
-        title: 'Traditional Platforms',
+        title: 'Traditional Fleet Management Platforms',
         points: [
-          'Manual load searching',
-          'No AI assistance',
-          'Missing profitable loads',
-          'Expensive per-truck pricing',
-          'Limited mobile features',
+          'Manual load searching and dispatch',
+          'No AI assistance or automation',
+          'Missing profitable loads daily',
+          'Expensive per-truck pricing ($50-100/truck)',
+          'Limited mobile features for drivers',
         ],
       },
       new: {
-        title: 'FleetExpedite Solution',
+        title: 'FleetExpedite Modern Solution',
         points: [
-          'AI Load Scoring 24/7',
-          'Automated load bidding',
-          'Real-time cost calculator',
-          'Modern mobile apps',
-          'Transparent pricing',
+          'AI Load Scoring works 24/7 automatically',
+          'Automated load bidding and dispatch',
+          'Real-time toll and fuel cost calculator',
+          'Modern iOS mobile apps included',
+          'Transparent, affordable pricing',
         ],
       },
     },
     features: {
-      title: 'Everything You Need',
-      subtitle: 'Complete fleet management solution.',
+      title: 'Complete Fleet Management Features',
+      subtitle: 'Everything your trucking company needs in one platform.',
       list: [
         {
           icon: '🤖',
           title: 'AI Load Scoring',
-          description: 'Intelligent algorithm ranks 1000+ loads automatically based on profitability',
+          description: 'Intelligent algorithm ranks 1000+ loads automatically based on profitability, distance, and your fleet preferences',
         },
         {
           icon: '💰',
           title: 'Trip Cost Calculator',
-          description: 'Real-time toll and fuel cost calculation using TollGuru and EIA data',
+          description: 'Real-time toll and fuel cost calculation using TollGuru and EIA data for accurate profit estimates',
         },
         {
           icon: '📍',
-          title: 'Real-Time GPS',
-          description: 'Track every truck on live map. Know exactly where your fleet is.',
+          title: 'Real-Time GPS Tracking',
+          description: 'Track every truck on live map with real-time location updates. Know exactly where your fleet is at all times.',
         },
         {
           icon: '📱',
-          title: 'Mobile Apps',
-          description: 'iOS apps for company drivers and owner-operators with different features.',
+          title: 'Mobile Apps for Drivers',
+          description: 'iOS apps for company drivers and owner-operators with load management, GPS tracking, and document upload.',
         },
         {
           icon: '📊',
           title: 'Analytics Dashboard',
-          description: 'Revenue reports, driver performance, load history - all in one place.',
+          description: 'Revenue reports, driver performance metrics, load history, and profitability analysis - all in one dashboard.',
         },
         {
           icon: '💼',
           title: 'Broker Integration',
-          description: 'Connect with DAT, Truckstop, and send rate confirmations instantly.',
+          description: 'Direct integration with DAT, Truckstop load boards, and automated rate confirmation sending.',
         },
       ],
     },
@@ -133,7 +142,7 @@ export default function FleetExpediateLanding() {
       driver: {
         name: 'Company Driver App',
         productName: 'FleetExpedite Driver',
-        price: '$12',
+        price: '$19',
         period: '/month',
         desc: 'Per driver pricing',
         badge: 'DRIVERS',
@@ -391,7 +400,7 @@ export default function FleetExpediateLanding() {
           <div className="relative w-full h-[500px] md:h-[600px]">
             <Image 
               src="/images/truck-hero.jpg" 
-              alt="FleetExpedite Trucks" 
+              alt="FleetExpedite AI-Powered Fleet Management Software" 
               fill
               className="object-cover"
               priority
@@ -415,37 +424,27 @@ export default function FleetExpediateLanding() {
               </div>
             </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.4 }}
-              className="absolute bottom-12 left-44 md:bottom-16 md:left-56 hidden md:block"
-            >
-              <h1 className="text-4xl md:text-5xl font-bold text-white drop-shadow-2xl">
-                FleetExpedite
-              </h1>
-              <p className="text-white/80 text-lg drop-shadow-lg">AI-Powered Fleet Management</p>
-            </motion.div>
+           
           </div>
 
           <div className="bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 px-6 py-20">
             <div className="max-w-6xl mx-auto text-center">
-              <motion.h2
+              <motion.h1
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5 }}
                 className="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight"
               >
                 {t.hero.title}
-              </motion.h2>
-              <motion.p
+              </motion.h1>
+              <motion.h2
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.6 }}
                 className="text-2xl text-white/80 mb-12 max-w-4xl mx-auto"
               >
                 {t.hero.subtitle}
-              </motion.p>
+              </motion.h2>
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -597,14 +596,114 @@ export default function FleetExpediateLanding() {
           </div>
         </section>
 
+        {/* FAQ Section - NEW SEO CONTENT */}
+        <section className="py-20 px-6 bg-black/20">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-4xl md:text-5xl font-bold text-white text-center mb-4">
+              Frequently Asked Questions
+            </h2>
+            <p className="text-xl text-white/60 text-center mb-12">
+              Everything you need to know about FleetExpedite fleet management software
+            </p>
+            
+            <div className="space-y-6">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="bg-white/5 border border-white/10 rounded-xl p-6 hover:bg-white/10 transition"
+              >
+                <h3 className="text-xl md:text-2xl font-bold text-white mb-3">
+                  What is fleet management software?
+                </h3>
+                <p className="text-white/70 text-lg leading-relaxed">
+                  Fleet management software is a comprehensive platform that helps trucking companies manage their vehicles, drivers, loads, and operations in one centralized system. FleetExpedite combines dispatch management, GPS tracking, load matching with AI, trip cost calculators, driver mobile apps, and analytics dashboards. Modern fleet management software automates manual tasks like load searching and bidding, provides real-time visibility into fleet operations, and helps companies maximize profitability through intelligent load scoring and route optimization.
+                </p>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.1 }}
+                className="bg-white/5 border border-white/10 rounded-xl p-6 hover:bg-white/10 transition"
+              >
+                <h3 className="text-xl md:text-2xl font-bold text-white mb-3">
+                  How does AI improve fleet dispatch?
+                </h3>
+                <p className="text-white/70 text-lg leading-relaxed">
+                  FleetExpedite's AI Load Scoring Engine automatically analyzes and ranks 1000+ loads based on profitability, distance, fuel costs, tolls, and your fleet's historical performance. The AI works 24/7, so you never miss profitable loads even during off-hours or weekends. It learns your preferences over time and can automatically bid on loads that match your criteria. This eliminates hours of manual load board searching and ensures your dispatchers focus on high-value activities. The result is typically 15-30% improvement in load profitability and significant time savings for dispatch teams.
+                </p>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 }}
+                className="bg-white/5 border border-white/10 rounded-xl p-6 hover:bg-white/10 transition"
+              >
+                <h3 className="text-xl md:text-2xl font-bold text-white mb-3">
+                  What's the cost of fleet management software?
+                </h3>
+                <p className="text-white/70 text-lg leading-relaxed">
+                  Traditional fleet management software like Rose Rocket, Samsara, or Motive charge $50-100 per truck per month, which adds up to $6,000-12,000 annually for a 10-truck fleet. FleetExpedite offers transparent pricing starting at just $12/month per driver for mobile apps, with enterprise dispatch platform pricing available on request. Our platform is typically 60% cheaper than competitors while offering more advanced features like AI load scoring and real-time trip cost calculators. For owner-operators, we offer a unique 1% commission model - the first 100 users lock in this rate forever instead of the standard 2.5%.
+                </p>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.3 }}
+                className="bg-white/5 border border-white/10 rounded-xl p-6 hover:bg-white/10 transition"
+              >
+                <h3 className="text-xl md:text-2xl font-bold text-white mb-3">
+                  Do you offer mobile apps for drivers?
+                </h3>
+                <p className="text-white/70 text-lg leading-relaxed">
+                  Yes! FleetExpedite includes professional iOS mobile apps for both company drivers and owner-operators. The driver app provides real-time GPS tracking, load status updates, direct messaging with dispatch, BOL and POD document upload with digital signatures, proof of delivery photo capture, and push notifications for load updates. The owner-operator app includes all driver features plus AI-powered self-dispatch capabilities, load board integration, automated bidding, and a trip cost calculator. Both apps are designed specifically for truckers and work seamlessly with our web-based dispatch dashboard.
+                </p>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.4 }}
+                className="bg-white/5 border border-white/10 rounded-xl p-6 hover:bg-white/10 transition"
+              >
+                <h3 className="text-xl md:text-2xl font-bold text-white mb-3">
+                  How does FleetExpedite compare to competitors like Rose Rocket or Samsara?
+                </h3>
+                <p className="text-white/70 text-lg leading-relaxed">
+                  FleetExpedite is built specifically for modern trucking companies that want automation and AI-powered features without enterprise-level pricing. Unlike legacy systems like Rose Rocket ($50-100/truck/month), we charge a flat rate for enterprise dispatch or simple per-driver pricing for mobile apps. We're typically 60% cheaper while offering superior features: AI load scoring that competitors don't have, real-time toll and fuel cost calculation using TollGuru and EIA data, modern iOS mobile apps (not clunky web wrappers), automated load bidding, and direct integration with DAT and Truckstop load boards. We're California-based with 24/7 US support, and our platform is designed for small-to-medium fleets (1-100 trucks) rather than enterprise mega-carriers.
+                </p>
+              </motion.div>
+            </div>
+
+            <div className="mt-12 text-center">
+              <p className="text-white/60 text-lg mb-6">
+                Have more questions about our fleet management software?
+              </p>
+              <a 
+                href="mailto:contact@fleetexpedite.com"
+                className="inline-block px-8 py-4 bg-blue-500 hover:bg-blue-600 rounded-xl text-white font-bold text-lg transition"
+              >
+                Contact Us
+              </a>
+            </div>
+          </div>
+        </section>
+
         {/* Enterprise */}
         <section className="py-20 px-6 bg-black/20">
           <div className="max-w-6xl mx-auto">
             <div className="grid md:grid-cols-2 gap-12 items-center">
               <div>
-                <h2 className="text-5xl font-bold text-white mb-6">Enterprise Solutions</h2>
+                <h2 className="text-5xl font-bold text-white mb-6">Enterprise Fleet Management Solutions</h2>
                 <p className="text-2xl text-white/70 mb-6">
-                  For fleets with 50+ trucks, we offer custom pricing, dedicated support, and advanced analytics.
+                  For fleets with 50+ trucks, we offer custom pricing, dedicated support, and advanced analytics tailored to your operations.
                 </p>
                 <ul className="space-y-4 mb-8">
                   <li className="flex items-center gap-3 text-white/80 text-lg">
