@@ -1,869 +1,906 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import Image from 'next/image';
+import { useEffect } from "react";
 
-// Structured Data for SEO
-const structuredData = {
-  "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  "name": "FleetExpedite",
-  "applicationCategory": "BusinessApplication",
-  "operatingSystem": "Web, iOS",
-  "offers": {
-    "@type": "Offer",
-    "price": "15.00",
-    "priceCurrency": "USD",
-    "priceValidUntil": "2026-12-31"
-  },
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": "4.9",
-    "reviewCount": "127"
-  },
-  "description": "AI-powered fleet management software for trucking companies. Automated dispatch, real-time GPS tracking, smart load matching, and mobile apps for drivers. Modern fleet management platform with AI load scoring and trip cost calculator.",
-  "url": "https://fleetexpedite.com",
-  "screenshot": "https://fleetexpedite.com/dashboard-preview.png",
-  "featureList": [
-    "AI Load Scoring Engine",
-    "Real-time GPS Tracking",
-    "Trip Cost Calculator",
-    "Mobile Apps for Drivers",
-    "Automated Dispatch",
-    "Analytics Dashboard"
-  ]
-};
+// ============================================================================
+// FleetExpedite.com — Corporate landing page
+//
+// Design language: matches fleetexpedite.io (Satoshi font, midnight navy,
+// orange accent, hybrid Apple-clean + brand identity).
+//
+// Audience: investors, partners, press, talent (NOT drivers — drivers go to .io).
+//
+// Sections: Hero • What we build • Trust • About • Contact
+// ============================================================================
 
-export default function FleetExpediateLanding() {
-  const [showRegisterModal, setShowRegisterModal] = useState(false);
-
-  const content = {
-    nav: {
-      about: 'About',
-      features: 'Features',
-      pricing: 'Pricing',
-      blog: 'Blog',
-      contact: 'Contact',
-    },
-    hero: {
-      title: 'AI-Powered Fleet Management Software for Trucking Companies',
-      subtitle: 'Modern dispatch software with AI load scoring, real-time GPS tracking, and mobile apps for drivers and owner-operators. Streamline your fleet operations with intelligent automation.',
-      cta: 'Get Started',
-      cta2: 'Learn More',
-    },
-    about: {
-      title: 'About FleetExpedite',
-      description: 'California-based IT company with 5 years in business, serving US trucking customers for the last 3 years. We build modern, AI-powered fleet management solutions that help trucking companies operate more efficiently and profitably.',
-    },
-    problem: {
-      title: 'Stop Overpaying for Fleet Management Software',
-      old: {
-        title: 'Traditional Fleet Management Platforms',
-        points: [
-          'Manual load searching and dispatch',
-          'No AI assistance or automation',
-          'Missing profitable loads daily',
-          'Expensive per-truck pricing ($50-100/truck)',
-          'Limited mobile features for drivers',
-        ],
+export default function HomePage() {
+  // Fade-in scroll reveal
+  useEffect(() => {
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add("in");
+            io.unobserve(e.target);
+          }
+        });
       },
-      new: {
-        title: 'FleetExpedite Modern Solution',
-        points: [
-          'AI Load Scoring works 24/7 automatically',
-          'Automated load bidding and dispatch',
-          'Real-time toll and fuel cost calculator',
-          'Modern iOS mobile apps included',
-          'Transparent, affordable pricing',
-        ],
-      },
-    },
-    features: {
-      title: 'Complete Fleet Management Features',
-      subtitle: 'Everything your trucking company needs in one platform.',
-      list: [
-        {
-          icon: '🤖',
-          title: 'AI Load Scoring',
-          description: 'Intelligent algorithm ranks 1000+ loads automatically based on profitability, distance, and your fleet preferences',
-        },
-        {
-          icon: '💰',
-          title: 'Trip Cost Calculator',
-          description: 'Real-time toll and fuel cost calculation using TollGuru and EIA data for accurate profit estimates',
-        },
-        {
-          icon: '📍',
-          title: 'Real-Time GPS Tracking',
-          description: 'Track every truck on live map with real-time location updates. Know exactly where your fleet is at all times.',
-        },
-        {
-          icon: '📱',
-          title: 'Mobile Apps for Drivers',
-          description: 'iOS apps for company drivers and owner-operators with load management, GPS tracking, and document upload.',
-        },
-        {
-          icon: '📊',
-          title: 'Analytics Dashboard',
-          description: 'Revenue reports, driver performance metrics, load history, and profitability analysis - all in one dashboard.',
-        },
-        {
-          icon: '💼',
-          title: 'Broker Integration',
-          description: 'Direct integration with DAT, Truckstop load boards, and automated rate confirmation sending.',
-        },
-      ],
-    },
-    pricing: {
-      title: 'Flexible Pricing Options',
-      subtitle: 'Choose the solution that fits your business',
-      dispatch: {
-        name: 'Dispatch as a Service',
-        productName: 'FleetExpedite',
-        price: 'Register for',
-        priceSubtext: 'Pricing',
-        period: '',
-        desc: 'Complete dispatch platform',
-        badge: 'ENTERPRISE',
-        features: [
-          'AI Load Scoring Engine',
-          'Real-time Trip Cost Calculator',
-          'Web dashboard for dispatchers',
-          'Load management tools',
-          'Broker communication',
-          'Real-time GPS tracking',
-          'Analytics & reports',
-          'FleetExpedite Driver app included',
-        ],
-        comparison: '60% cheaper than Rose Rocket',
-        cta: 'Register Now',
-      },
-      driver: {
-        name: 'Company Driver App',
-        productName: 'FleetExpedite Driver',
-        price: '$19',
-        period: '/month',
-        desc: 'Per driver pricing',
-        badge: 'DRIVERS',
-        features: [
-          'iOS mobile app',
-          'Real-time GPS tracking',
-          'Load status updates',
-          'Direct messaging',
-          'Document upload (BOL)',
-          'Proof of delivery',
-          'Push notifications',
-          'Modern driver interface',
-        ],
-        comparison: 'Industry standard: $15-25/driver',
-        cta: 'Get Started',
-        link: '/driver-app',
-      },
-      ownerOperator: {
-        name: 'Owner-Operator App',
-        productName: 'FleetExpedite OO',
-        price: '1%',
-        priceSubtext: 'Commission', 
-        period: 'per load',
-        desc: 'For independent operators',
-        badge: '🔥 EARLY ADOPTER SPECIAL',
-        promotion: {
-          title: 'First 100 Drivers Only!',
-          highlights: [
-            '1% Commission FOR LIFE',
-            'First 30 Days: 0% Commission',
-            'Regular rate: 2.5%',
-            'Save $1,500+ per $100k revenue',
-          ],
-        },
-        features: [
-          '✓ Lock in 1% rate forever (Reg: 2.5%)',
-          '✓ 30 days FREE (0% commission)',
-          '✓ 24/7 AI Load Matching',
-          '✓ Real-time fuel & toll calculator',
-          '✓ Automated load bidding',
-          '✓ Direct broker integration',
-          '✓ Keep 99% of your earnings',
-          '✓ Rate NEVER increases',
-        ],
-        comparison: 'Limited to first 100 drivers - Secure your spot!',
-        cta: 'Claim Your Spot',
-        urgent: 'Only XX spots left!',
-        link: '/owner-operator-app',
-      },
-    },
-    cta: {
-      title: 'Ready to Modernize Your Fleet?',
-      subtitle: 'Join trucking companies already using FleetExpedite',
-      button: 'Get Started',
-      nobind: 'Contact us for custom pricing and demos.',
-    },
-    contact: {
-      title: 'Get in Touch',
-      email: 'Email',
-      subtitle: 'Have questions? We\'re here to help.',
-    },
-    footer: {
-      tagline: 'AI-Powered Fleet Management Solutions',
-      location: 'California, USA',
-      rights: '© 2025 FleetExpedite. All rights reserved.',
-    },
-    register: {
-      title: 'Register for FleetExpedite',
-      subtitle: 'Get started with our enterprise dispatch solution',
-      fields: {
-        name: 'Full Name',
-        title: 'Job Title',
-        company: 'Company Name',
-        website: 'Company Website',
-        email: 'Company Email',
-        phone: 'Phone Number',
-      },
-      submit: 'Submit Registration',
-      cancel: 'Cancel',
-    },
-  };
-
-  const t = content;
+      { threshold: 0.1, rootMargin: "0px 0px -80px 0px" }
+    );
+    document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+    return () => io.disconnect();
+  }, []);
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      {/* ===== Satoshi font (matches .io) ===== */}
+      <link
+        href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,600,700,800,900&display=swap"
+        rel="stylesheet"
       />
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900">
-        {/* Registration Modal */}
-        <AnimatePresence>
-          {showRegisterModal && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4"
-              onClick={() => setShowRegisterModal(false)}
-            >
-              <motion.div
-                initial={{ scale: 0.9, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                exit={{ scale: 0.9, opacity: 0 }}
-                onClick={(e) => e.stopPropagation()}
-                className="bg-slate-800 rounded-2xl p-8 max-w-md w-full border border-white/10"
-              >
-                <h3 className="text-3xl font-bold text-white mb-2">{t.register.title}</h3>
-                <p className="text-white/60 mb-6">{t.register.subtitle}</p>
-                
-                <form className="space-y-4" onSubmit={async (e) => {
-                  e.preventDefault();
-                  const formData = new FormData(e.currentTarget);
-                  const data = {
-                    name: formData.get('name'),
-                    title: formData.get('title'),
-                    company: formData.get('company'),
-                    website: formData.get('website'),
-                    email: formData.get('email'),
-                    phone: formData.get('phone'),
-                  };
-                  
-                  try {
-                    const res = await fetch('/api/register', {
-                      method: 'POST',
-                      headers: { 'Content-Type': 'application/json' },
-                      body: JSON.stringify(data),
-                    });
-                    
-                    if (res.ok) {
-                      alert('Registration submitted! We will contact you soon.');
-                      setShowRegisterModal(false);
-                    } else {
-                      alert('Failed to submit. Please try again.');
-                    }
-                  } catch (error) {
-                    alert('Error submitting registration.');
-                  }
-                }}>
-                  <div>
-                    <label className="block text-white/80 mb-2 text-sm">{t.register.fields.name}</label>
-                    <input
-                      name="name"
-                      type="text"
-                      required
-                      className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white focus:border-blue-500 focus:outline-none"
-                      placeholder="John Doe"
-                    />
-                  </div>
-                  
-                  <div>
-                    <label className="block text-white/80 mb-2 text-sm">{t.register.fields.title}</label>
-                    <input
-                      name="title"
-                      type="text"
-                      required
-                      className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white focus:border-blue-500 focus:outline-none"
-                      placeholder="Fleet Manager"
-                    />
-                  </div>
-                  
-                  <div>
-                    <label className="block text-white/80 mb-2 text-sm">{t.register.fields.company}</label>
-                    <input
-                      name="company"
-                      type="text"
-                      required
-                      className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white focus:border-blue-500 focus:outline-none"
-                      placeholder="ABC Trucking LLC"
-                    />
-                  </div>
-                  
-                  <div>
-                    <label className="block text-white/80 mb-2 text-sm">{t.register.fields.website}</label>
-                    <input
-                      name="website"
-                      type="text"
-                      className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white focus:border-blue-500 focus:outline-none"
-                      placeholder="example.com"
-                    />
-                  </div>
-                  
-                  <div>
-                    <label className="block text-white/80 mb-2 text-sm">{t.register.fields.email}</label>
-                    <input
-                      name="email"
-                      type="email"
-                      required
-                      className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white focus:border-blue-500 focus:outline-none"
-                      placeholder="contact@example.com"
-                    />
-                  </div>
-                  
-                  <div>
-                    <label className="block text-white/80 mb-2 text-sm">{t.register.fields.phone}</label>
-                    <input
-                      name="phone"
-                      type="tel"
-                      required
-                      className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white focus:border-blue-500 focus:outline-none"
-                      placeholder="+1 (555) 123-4567"
-                    />
-                  </div>
-                  
-                  <div className="flex gap-4 pt-4">
-                    <button
-                      type="button"
-                      onClick={() => setShowRegisterModal(false)}
-                      className="flex-1 px-6 py-3 bg-white/10 hover:bg-white/20 rounded-lg text-white font-semibold transition"
-                    >
-                      {t.register.cancel}
-                    </button>
-                    <button
-                      type="submit"
-                      className="flex-1 px-6 py-3 bg-blue-500 hover:bg-blue-600 rounded-lg text-white font-semibold transition"
-                    >
-                      {t.register.submit}
-                    </button>
-                  </div>
-                </form>
-              </motion.div>
-            </motion.div>
-          )}
-        </AnimatePresence>
 
-        {/* Navigation */}
-        <nav className="fixed top-0 w-full bg-black/30 backdrop-blur-xl border-b border-white/10 z-40">
-          <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-            <div className="text-2xl font-bold text-white flex items-center gap-3">
-              <span className="text-3xl font-extrabold tracking-tight"></span>
-            </div>
-            <div className="flex items-center gap-6">
-              <a href="#about" className="text-white/80 hover:text-white transition hidden md:block">
-                {t.nav.about}
-              </a>
-              <a href="#features" className="text-white/80 hover:text-white transition hidden md:block">
-                {t.nav.features}
-              </a>
-              <a href="#pricing" className="text-white/80 hover:text-white transition hidden md:block">
-                {t.nav.pricing}
-              </a>
-              <a href="/blog" className="text-white/80 hover:text-white transition hidden md:block">
-                {t.nav.blog}
-              </a>
-              <a href="#contact" className="text-white/80 hover:text-white transition hidden md:block">
-                {t.nav.contact}
-              </a>
-            </div>
+      <style jsx global>{`
+        :root {
+          --navy-900: #060b1a;
+          --navy-800: #0a1428;
+          --navy-700: #0f1a3a;
+          --navy-600: #15224a;
+          --navy-500: #1e2d5c;
+          --orange: #ff7a2d;
+          --orange-2: #ff9356;
+          --orange-d: #e85f0e;
+          --ink-100: #ffffff;
+          --ink-200: #e8ebf5;
+          --ink-300: #b8c0d4;
+          --ink-400: #8089a0;
+          --ink-500: #5a6280;
+          --line-1: rgba(255, 255, 255, 0.08);
+          --line-2: rgba(255, 255, 255, 0.14);
+          --glass: rgba(255, 255, 255, 0.04);
+          --glass-2: rgba(255, 255, 255, 0.07);
+        }
+
+        * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+        body {
+          font-family: "Satoshi", -apple-system, BlinkMacSystemFont,
+            "SF Pro Text", "Helvetica Neue", sans-serif;
+          background: var(--navy-800);
+          color: var(--ink-100);
+          line-height: 1.45;
+          margin: 0;
+          padding: 0;
+          overflow-x: hidden;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+        }
+
+        a { color: inherit; text-decoration: none; }
+
+        body::before {
+          content: "";
+          position: fixed;
+          inset: 0;
+          z-index: 1;
+          pointer-events: none;
+          opacity: 0.035;
+          background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='200' height='200' filter='url(%23n)'/></svg>");
+        }
+
+        .reveal { opacity: 0; transform: translateY(36px); transition: all 1s cubic-bezier(0.2, 0.8, 0.2, 1); }
+        .reveal.in { opacity: 1; transform: translateY(0); }
+      `}</style>
+
+      <main style={{ position: "relative", zIndex: 2 }}>
+        {/* ============================= NAV ============================= */}
+        <nav
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            right: 0,
+            zIndex: 50,
+            height: 64,
+            backdropFilter: "saturate(180%) blur(18px)",
+            WebkitBackdropFilter: "saturate(180%) blur(18px)",
+            background: "rgba(10, 20, 40, 0.6)",
+            borderBottom: "1px solid var(--line-1)",
+          }}
+        >
+          <div
+            style={{
+              maxWidth: 1240,
+              margin: "0 auto",
+              height: "100%",
+              padding: "0 28px",
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            <a
+              href="/"
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: 12,
+                fontWeight: 700,
+                fontSize: 19,
+                letterSpacing: "-0.02em",
+                color: "var(--ink-100)",
+              }}
+            >
+              <img src="/images/logo.jpg" alt="FleetExpedite" style={{ height: 32, width: "auto", display: "block", borderRadius: 6 }} />
+              <span>FleetExpedite</span>
+            </a>
+            <a
+              href="#contact"
+              style={{
+                padding: "9px 18px",
+                background: "var(--orange)",
+                color: "#fff",
+                fontWeight: 600,
+                fontSize: 14,
+                borderRadius: 999,
+                letterSpacing: "-0.005em",
+              }}
+            >
+              Contact
+            </a>
           </div>
         </nav>
 
-        {/* Hero with Truck Background */}
-        <section className="relative pt-0 overflow-hidden">
-          <div className="relative w-full h-[500px] md:h-[600px]">
-            <Image 
-              src="/images/truck-hero.jpg" 
-              alt="FleetExpedite AI-Powered Fleet Management Software" 
-              fill
-              className="object-cover"
-              priority
-              sizes="100vw"
+        {/* ============================= HERO ============================= */}
+        <section
+          style={{
+            position: "relative",
+            padding: "160px 28px 80px",
+            maxWidth: 1240,
+            margin: "0 auto",
+            overflow: "hidden",
+          }}
+        >
+          <div
+            style={{
+              position: "absolute",
+              top: -150,
+              right: -200,
+              width: 700,
+              height: 700,
+              filter: "blur(120px)",
+              opacity: 0.18,
+              background: "radial-gradient(circle, var(--orange) 0%, transparent 70%)",
+              pointerEvents: "none",
+            }}
+          />
+          <div
+            style={{
+              position: "absolute",
+              top: 200,
+              left: -300,
+              width: 800,
+              height: 800,
+              filter: "blur(120px)",
+              opacity: 0.15,
+              background: "radial-gradient(circle, #4a6bff 0%, transparent 70%)",
+              pointerEvents: "none",
+            }}
+          />
+
+          <div
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 10,
+              padding: "7px 14px",
+              background: "var(--glass)",
+              border: "1px solid var(--line-2)",
+              borderRadius: 999,
+              fontSize: 13,
+              fontWeight: 500,
+              letterSpacing: "0.02em",
+              color: "var(--ink-300)",
+              marginBottom: 28,
+              position: "relative",
+            }}
+          >
+            <span
+              style={{
+                width: 6,
+                height: 6,
+                borderRadius: "50%",
+                background: "var(--orange)",
+                boxShadow: "0 0 12px var(--orange)",
+              }}
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-slate-900/30 to-slate-900/80"></div>
-            
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.3 }}
-              className="absolute bottom-6 left-6 md:bottom-8 md:left-8 z-10"
+            <span>IVART LLC · Sheridan, Wyoming</span>
+          </div>
+
+          <h1
+            style={{
+              fontFamily: "Satoshi, sans-serif",
+              fontWeight: 900,
+              fontSize: "clamp(56px, 10vw, 138px)",
+              letterSpacing: "-0.045em",
+              lineHeight: 0.96,
+              maxWidth: 1100,
+              marginBottom: 32,
+              position: "relative",
+            }}
+          >
+            AI-native trucking{" "}
+            <span
+              style={{
+                background: "linear-gradient(135deg, var(--orange) 0%, var(--orange-2) 100%)",
+                WebkitBackgroundClip: "text",
+                backgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                fontWeight: 900,
+              }}
             >
-              <div className="w-36 h-36 md:w-48 md:h-48 rounded-full bg-slate-900 border-4 border-white shadow-2xl flex items-center justify-center overflow-hidden relative">
-                <Image 
-                  src="/images/logo.jpg" 
-                  alt="FleetExpedite Logo" 
-                  fill
-                  className="object-cover scale-110"
-                />
-              </div>
-            </motion.div>
+              platform.
+            </span>
+          </h1>
 
-           
-          </div>
+          <p
+            style={{
+              fontSize: "clamp(18px, 1.7vw, 22px)",
+              fontWeight: 400,
+              color: "var(--ink-300)",
+              maxWidth: 640,
+              lineHeight: 1.45,
+              letterSpacing: "-0.01em",
+              marginBottom: 40,
+              position: "relative",
+            }}
+          >
+            Building the next decade of fleet operations — load matching,
+            real-time fuel intelligence, and connected financial workflows for
+            modern trucking companies.
+          </p>
 
-          <div className="bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 px-6 py-20">
-            <div className="max-w-6xl mx-auto text-center">
-              <motion.h1
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5 }}
-                className="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight"
-              >
-                {t.hero.title}
-              </motion.h1>
-              <motion.h2
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.6 }}
-                className="text-2xl text-white/80 mb-12 max-w-4xl mx-auto"
-              >
-                {t.hero.subtitle}
-              </motion.h2>
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.7 }}
-                className="flex gap-4 justify-center flex-wrap"
-              >
-                <button 
-                  onClick={() => setShowRegisterModal(true)}
-                  className="px-10 py-5 bg-blue-500 hover:bg-blue-600 rounded-xl text-white font-bold text-xl transition shadow-lg shadow-blue-500/50 hover:shadow-blue-500/70 hover:scale-105 transform"
-                >
-                  {t.hero.cta}
-                </button>
-                <a 
-                  href="#features"
-                  className="px-10 py-5 bg-white/10 hover:bg-white/20 rounded-xl text-white font-bold text-xl transition border border-white/20 backdrop-blur-sm hover:scale-105 transform"
-                >
-                  {t.hero.cta2}
-                </a>
-              </motion.div>
-            </div>
-          </div>
-        </section>
-
-        {/* About */}
-        <section id="about" className="py-20 px-6 bg-black/20">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-5xl font-bold text-white mb-8">{t.about.title}</h2>
-            <p className="text-2xl text-white/70 leading-relaxed">
-              {t.about.description}
-            </p>
+          <div style={{ display: "flex", gap: 14, flexWrap: "wrap", position: "relative" }}>
+            <a
+              href="#contact"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                padding: "14px 26px",
+                borderRadius: 999,
+                fontWeight: 600,
+                fontSize: 15,
+                letterSpacing: "-0.01em",
+                background: "var(--orange)",
+                color: "#fff",
+              }}
+            >
+              Talk to us <span style={{ fontSize: 16, lineHeight: 1 }}>→</span>
+            </a>
+            <a
+              href="https://fleetexpedite.io"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                padding: "14px 26px",
+                borderRadius: 999,
+                fontWeight: 600,
+                fontSize: 15,
+                letterSpacing: "-0.01em",
+                background: "var(--glass)",
+                color: "var(--ink-100)",
+                border: "1px solid var(--line-2)",
+              }}
+            >
+              For drivers — fleetexpedite.io
+            </a>
           </div>
         </section>
 
-        {/* Problem/Solution */}
-        <section className="py-20 px-6">
-          <div className="max-w-6xl mx-auto">
-            <h2 className="text-5xl font-bold text-white text-center mb-16">{t.problem.title}</h2>
-            <div className="grid md:grid-cols-2 gap-8">
-              <div className="bg-red-500/10 border border-red-500/30 rounded-2xl p-8">
-                <div className="text-red-400 text-5xl mb-4">❌</div>
-                <h3 className="text-3xl font-bold text-white mb-6">{t.problem.old.title}</h3>
-                <ul className="space-y-4">
-                  {t.problem.old.points.map((point: string, i: number) => (
-                    <li key={i} className="flex items-start gap-3 text-white/80 text-lg">
-                      <span className="text-red-400 mt-1">•</span>
-                      {point}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="bg-green-500/10 border border-green-500/30 rounded-2xl p-8">
-                <div className="text-green-400 text-5xl mb-4">✅</div>
-                <h3 className="text-3xl font-bold text-white mb-6">{t.problem.new.title}</h3>
-                <ul className="space-y-4">
-                  {t.problem.new.points.map((point: string, i: number) => (
-                    <li key={i} className="flex items-start gap-3 text-white/80 text-lg">
-                      <span className="text-green-400 mt-1">✓</span>
-                      {point}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
+        {/* ============================= TRUCK BAND ============================= */}
+        <section
+          className="reveal"
+          style={{
+            position: "relative",
+            margin: "40px auto",
+            maxWidth: 1240,
+            padding: "0 28px",
+          }}
+        >
+          <div
+            style={{
+              borderRadius: 24,
+              overflow: "hidden",
+              height: "clamp(280px, 45vh, 480px)",
+              backgroundImage:
+                "linear-gradient(180deg, transparent 0%, transparent 70%, rgba(10, 20, 40, 0.85) 100%), url('/images/truck-hero.jpg')",
+              backgroundSize: "cover",
+              backgroundPosition: "70% center",
+              backgroundColor: "#1a2548",
+              position: "relative",
+            }}
+          >
+            <div
+              style={{
+                position: "absolute",
+                inset: 0,
+                background:
+                  "linear-gradient(90deg, rgba(10, 20, 40, 0.6) 0%, transparent 25%, transparent 75%, rgba(10, 20, 40, 0.6) 100%)",
+                pointerEvents: "none",
+              }}
+            />
           </div>
         </section>
 
-        {/* Features */}
-        <section id="features" className="py-20 px-6 bg-black/20">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-16">
-              <h2 className="text-5xl font-bold text-white mb-4">{t.features.title}</h2>
-              <p className="text-2xl text-white/60">{t.features.subtitle}</p>
+        {/* ============================= WHAT WE BUILD ============================= */}
+        <section
+          className="reveal"
+          style={{
+            padding: "120px 28px",
+            maxWidth: 1240,
+            margin: "0 auto",
+          }}
+        >
+          <div style={{ maxWidth: 760, marginBottom: 64 }}>
+            <div
+              style={{
+                fontSize: 13,
+                fontWeight: 600,
+                letterSpacing: "0.12em",
+                textTransform: "uppercase",
+                color: "var(--orange)",
+                marginBottom: 18,
+              }}
+            >
+              What we build
             </div>
-            <div className="grid md:grid-cols-3 gap-8">
-              {t.features.list.map((feature: any, i: number) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.1 }}
-                  className="bg-white/5 border border-white/10 rounded-2xl p-8 hover:bg-white/10 transition"
-                >
-                  <div className="text-5xl mb-4">{feature.icon}</div>
-                  <h3 className="text-2xl font-bold text-white mb-3">{feature.title}</h3>
-                  <p className="text-white/70 text-lg">{feature.description}</p>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Pricing */}
-        <section id="pricing" className="py-20 px-6">
-          <div className="max-w-7xl mx-auto">
-            <div className="text-center mb-16">
-              <h2 className="text-5xl font-bold text-white mb-4">{t.pricing.title}</h2>
-              <p className="text-2xl text-white/60">{t.pricing.subtitle}</p>
-            </div>
-            <div className="grid md:grid-cols-3 gap-8">
-              <PricingCard
-                badge={t.pricing.dispatch.badge}
-                name={t.pricing.dispatch.name}
-                productName={t.pricing.dispatch.productName}
-                price={t.pricing.dispatch.price}
-                priceSubtext={t.pricing.dispatch.priceSubtext}
-                period={t.pricing.dispatch.period}
-                desc={t.pricing.dispatch.desc}
-                features={t.pricing.dispatch.features}
-                comparison={t.pricing.dispatch.comparison}
-                cta={t.pricing.dispatch.cta}
-                color="blue"
-                popular={false}
-                onClick={() => setShowRegisterModal(true)}
-              />
-              <PricingCard
-                badge={t.pricing.driver.badge}
-                name={t.pricing.driver.name}
-                productName={t.pricing.driver.productName}
-                price={t.pricing.driver.price}
-                period={t.pricing.driver.period}
-                desc={t.pricing.driver.desc}
-                features={t.pricing.driver.features}
-                comparison={t.pricing.driver.comparison}
-                cta={t.pricing.driver.cta}
-                color="green"
-                onClick={() => setShowRegisterModal(true)}
-                link={t.pricing.driver.link}
-              />
-              <PricingCard
-                badge={t.pricing.ownerOperator.badge}
-                name={t.pricing.ownerOperator.name}
-                productName={t.pricing.ownerOperator.productName}
-                price={t.pricing.ownerOperator.price}
-                priceSubtext={t.pricing.ownerOperator.priceSubtext}
-                period={t.pricing.ownerOperator.period}
-                desc={t.pricing.ownerOperator.desc}
-                features={t.pricing.ownerOperator.features}
-                comparison={t.pricing.ownerOperator.comparison}
-                cta={t.pricing.ownerOperator.cta}
-                color="orange"
-                popular={true}
-                promotion={t.pricing.ownerOperator.promotion}
-                urgent={t.pricing.ownerOperator.urgent}
-                onClick={() => setShowRegisterModal(true)}
-                link={t.pricing.ownerOperator.link}
-              />
-            </div>
-          </div>
-        </section>
-
-        {/* FAQ Section - NEW SEO CONTENT */}
-        <section className="py-20 px-6 bg-black/20">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-4xl md:text-5xl font-bold text-white text-center mb-4">
-              Frequently Asked Questions
+            <h2
+              style={{
+                fontFamily: "Satoshi, sans-serif",
+                fontWeight: 900,
+                fontSize: "clamp(44px, 6.5vw, 92px)",
+                letterSpacing: "-0.045em",
+                lineHeight: 1.0,
+                margin: 0,
+              }}
+            >
+              Three pillars.{" "}
+              <span style={{ color: "var(--ink-400)" }}>One platform.</span>
             </h2>
-            <p className="text-xl text-white/60 text-center mb-12">
-              Everything you need to know about FleetExpedite fleet management software
-            </p>
-            
-            <div className="space-y-6">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="bg-white/5 border border-white/10 rounded-xl p-6 hover:bg-white/10 transition"
-              >
-                <h3 className="text-xl md:text-2xl font-bold text-white mb-3">
-                  What is fleet management software?
-                </h3>
-                <p className="text-white/70 text-lg leading-relaxed">
-                  Fleet management software is a comprehensive platform that helps trucking companies manage their vehicles, drivers, loads, and operations in one centralized system. FleetExpedite combines dispatch management, GPS tracking, load matching with AI, trip cost calculators, driver mobile apps, and analytics dashboards. Modern fleet management software automates manual tasks like load searching and bidding, provides real-time visibility into fleet operations, and helps companies maximize profitability through intelligent load scoring and route optimization.
-                </p>
-              </motion.div>
+          </div>
 
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.1 }}
-                className="bg-white/5 border border-white/10 rounded-xl p-6 hover:bg-white/10 transition"
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+              gap: 20,
+            }}
+          >
+            {/* AI Dispatch */}
+            <div
+              style={{
+                background: "var(--glass)",
+                border: "1px solid var(--line-2)",
+                borderRadius: 24,
+                padding: "36px 32px",
+              }}
+            >
+              <div
+                style={{
+                  fontSize: 12,
+                  fontWeight: 700,
+                  letterSpacing: "0.15em",
+                  color: "var(--ink-400)",
+                  marginBottom: 16,
+                }}
               >
-                <h3 className="text-xl md:text-2xl font-bold text-white mb-3">
-                  How does AI improve fleet dispatch?
-                </h3>
-                <p className="text-white/70 text-lg leading-relaxed">
-                  FleetExpedite's AI Load Scoring Engine automatically analyzes and ranks 1000+ loads based on profitability, distance, fuel costs, tolls, and your fleet's historical performance. The AI works 24/7, so you never miss profitable loads even during off-hours or weekends. It learns your preferences over time and can automatically bid on loads that match your criteria. This eliminates hours of manual load board searching and ensures your dispatchers focus on high-value activities. The result is typically 15-30% improvement in load profitability and significant time savings for dispatch teams.
-                </p>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.2 }}
-                className="bg-white/5 border border-white/10 rounded-xl p-6 hover:bg-white/10 transition"
+                01 · AI DISPATCH
+              </div>
+              <h3
+                style={{
+                  fontFamily: "Satoshi, sans-serif",
+                  fontSize: 26,
+                  fontWeight: 800,
+                  letterSpacing: "-0.025em",
+                  lineHeight: 1.15,
+                  margin: "0 0 14px 0",
+                }}
               >
-                <h3 className="text-xl md:text-2xl font-bold text-white mb-3">
-                  What's the cost of fleet management software?
-                </h3>
-                <p className="text-white/70 text-lg leading-relaxed">
-                  Traditional fleet management software like Rose Rocket, Samsara, or Motive charge $50-100 per truck per month, which adds up to $6,000-12,000 annually for a 10-truck fleet. FleetExpedite offers transparent pricing starting at just $12/month per driver for mobile apps, with enterprise dispatch platform pricing available on request. Our platform is typically 60% cheaper than competitors while offering more advanced features like AI load scoring and real-time trip cost calculators. For owner-operators, we offer a unique 1% commission model - the first 100 users lock in this rate forever instead of the standard 2.5%.
-                </p>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.3 }}
-                className="bg-white/5 border border-white/10 rounded-xl p-6 hover:bg-white/10 transition"
+                Load intelligence at scale.
+              </h3>
+              <p
+                style={{
+                  color: "var(--ink-300)",
+                  fontSize: 15,
+                  lineHeight: 1.55,
+                  margin: 0,
+                }}
               >
-                <h3 className="text-xl md:text-2xl font-bold text-white mb-3">
-                  Do you offer mobile apps for drivers?
-                </h3>
-                <p className="text-white/70 text-lg leading-relaxed">
-                  Yes! FleetExpedite includes professional iOS mobile apps for both company drivers and owner-operators. The driver app provides real-time GPS tracking, load status updates, direct messaging with dispatch, BOL and POD document upload with digital signatures, proof of delivery photo capture, and push notifications for load updates. The owner-operator app includes all driver features plus AI-powered self-dispatch capabilities, load board integration, automated bidding, and a trip cost calculator. Both apps are designed specifically for truckers and work seamlessly with our web-based dispatch dashboard.
-                </p>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.4 }}
-                className="bg-white/5 border border-white/10 rounded-xl p-6 hover:bg-white/10 transition"
-              >
-                <h3 className="text-xl md:text-2xl font-bold text-white mb-3">
-                  How does FleetExpedite compare to competitors like Rose Rocket or Samsara?
-                </h3>
-                <p className="text-white/70 text-lg leading-relaxed">
-                  FleetExpedite is built specifically for modern trucking companies that want automation and AI-powered features without enterprise-level pricing. Unlike legacy systems like Rose Rocket ($50-100/truck/month), we charge a flat rate for enterprise dispatch or simple per-driver pricing for mobile apps. We're typically 60% cheaper while offering superior features: AI load scoring that competitors don't have, real-time toll and fuel cost calculation using TollGuru and EIA data, modern iOS mobile apps (not clunky web wrappers), automated load bidding, and direct integration with DAT and Truckstop load boards. We're California-based with 24/7 US support, and our platform is designed for small-to-medium fleets (1-100 trucks) rather than enterprise mega-carriers.
-                </p>
-              </motion.div>
+                Multi-board search, profitability scoring, automated rate
+                negotiation drafts, and one-tap rate confirmation signing.
+              </p>
             </div>
 
-            <div className="mt-12 text-center">
-              <p className="text-white/60 text-lg mb-6">
-                Have more questions about our fleet management software?
-              </p>
-              <a 
-                href="mailto:contact@fleetexpedite.com"
-                className="inline-block px-8 py-4 bg-blue-500 hover:bg-blue-600 rounded-xl text-white font-bold text-lg transition"
+            {/* Fleet Operations */}
+            <div
+              style={{
+                background: "var(--glass)",
+                border: "1px solid var(--line-2)",
+                borderRadius: 24,
+                padding: "36px 32px",
+              }}
+            >
+              <div
+                style={{
+                  fontSize: 12,
+                  fontWeight: 700,
+                  letterSpacing: "0.15em",
+                  color: "var(--ink-400)",
+                  marginBottom: 16,
+                }}
               >
-                Contact Us
-              </a>
+                02 · OPERATIONS
+              </div>
+              <h3
+                style={{
+                  fontFamily: "Satoshi, sans-serif",
+                  fontSize: 26,
+                  fontWeight: 800,
+                  letterSpacing: "-0.025em",
+                  lineHeight: 1.15,
+                  margin: "0 0 14px 0",
+                }}
+              >
+                Connected financial workflows.
+              </h3>
+              <p
+                style={{
+                  color: "var(--ink-300)",
+                  fontSize: 15,
+                  lineHeight: 1.55,
+                  margin: 0,
+                }}
+              >
+                Real-time fuel card transactions, automatic IFTA, QuickBooks
+                sync, and clean books — every load, every mile, accounted for.
+              </p>
+            </div>
+
+            {/* Mobile-first */}
+            <div
+              style={{
+                background:
+                  "linear-gradient(135deg, rgba(255, 122, 45, 0.08) 0%, rgba(255, 122, 45, 0.02) 100%)",
+                border: "1px solid rgba(255, 122, 45, 0.3)",
+                borderRadius: 24,
+                padding: "36px 32px",
+              }}
+            >
+              <div
+                style={{
+                  fontSize: 12,
+                  fontWeight: 700,
+                  letterSpacing: "0.15em",
+                  color: "var(--orange)",
+                  marginBottom: 16,
+                }}
+              >
+                03 · MOBILE
+              </div>
+              <h3
+                style={{
+                  fontFamily: "Satoshi, sans-serif",
+                  fontSize: 26,
+                  fontWeight: 800,
+                  letterSpacing: "-0.025em",
+                  lineHeight: 1.15,
+                  margin: "0 0 14px 0",
+                }}
+              >
+                Built for the cab, not the desk.
+              </h3>
+              <p
+                style={{
+                  color: "var(--ink-300)",
+                  fontSize: 15,
+                  lineHeight: 1.55,
+                  margin: 0,
+                }}
+              >
+                Native iOS for owner-operators and company drivers. Voice AI,
+                hands-free dispatch, multilingual support.
+              </p>
             </div>
           </div>
         </section>
 
-        {/* Enterprise */}
-        <section className="py-20 px-6 bg-black/20">
-          <div className="max-w-6xl mx-auto">
-            <div className="grid md:grid-cols-2 gap-12 items-center">
-              <div>
-                <h2 className="text-5xl font-bold text-white mb-6">Enterprise Fleet Management Solutions</h2>
-                <p className="text-2xl text-white/70 mb-6">
-                  For fleets with 50+ trucks, we offer custom pricing, dedicated support, and advanced analytics tailored to your operations.
-                </p>
-                <ul className="space-y-4 mb-8">
-                  <li className="flex items-center gap-3 text-white/80 text-lg">
-                    <span className="text-green-400">✓</span>
-                    <span>Custom pricing & volume discounts</span>
-                  </li>
-                  <li className="flex items-center gap-3 text-white/80 text-lg">
-                    <span className="text-green-400">✓</span>
-                    <span>Dedicated account manager</span>
-                  </li>
-                  <li className="flex items-center gap-3 text-white/80 text-lg">
-                    <span className="text-green-400">✓</span>
-                    <span>Priority support & onboarding</span>
-                  </li>
-                  <li className="flex items-center gap-3 text-white/80 text-lg">
-                    <span className="text-green-400">✓</span>
-                    <span>Advanced analytics & reporting</span>
-                  </li>
-                </ul>
-                <button 
-                  onClick={() => setShowRegisterModal(true)}
-                  className="px-10 py-5 bg-blue-500 hover:bg-blue-600 rounded-xl text-white font-bold text-xl transition shadow-lg"
+        {/* ============================= TRUST ============================= */}
+        <section
+          className="reveal"
+          style={{
+            padding: "100px 28px",
+            maxWidth: 1240,
+            margin: "0 auto",
+            textAlign: "center",
+          }}
+        >
+          <div
+            style={{
+              fontSize: 12,
+              letterSpacing: "0.18em",
+              textTransform: "uppercase",
+              color: "var(--ink-400)",
+              marginBottom: 40,
+              fontWeight: 500,
+            }}
+          >
+            Integrations & partnerships
+          </div>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              flexWrap: "wrap",
+              gap: "clamp(28px, 5vw, 64px)",
+              opacity: 0.85,
+            }}
+          >
+            {["WEX", "Apex Capital", "QuickBooks", "EFS", "Stripe", "Plaid"].map(
+              (name) => (
+                <span
+                  key={name}
+                  style={{
+                    fontFamily: "Satoshi, sans-serif",
+                    fontWeight: 700,
+                    fontSize: "clamp(16px, 1.6vw, 22px)",
+                    letterSpacing: "-0.015em",
+                    color: "var(--ink-200)",
+                  }}
                 >
-                  Contact Sales
-                </button>
-              </div>
-              <div className="relative">
-                <div className="bg-gradient-to-br from-purple-500/10 to-blue-500/10 border border-white/10 rounded-2xl p-4 shadow-2xl">
-                  <img 
-                    src="/dashboard-preview.png" 
-                    alt="FleetExpedite Analytics Dashboard"
-                    className="rounded-lg w-full"
-                  />
+                  {name}
+                </span>
+              )
+            )}
+          </div>
+        </section>
+
+        {/* ============================= ABOUT ============================= */}
+        <section
+          className="reveal"
+          style={{
+            padding: "120px 28px",
+            position: "relative",
+            background:
+              "radial-gradient(ellipse at center, rgba(255, 122, 45, 0.08) 0%, transparent 60%)",
+          }}
+        >
+          <div style={{ maxWidth: 880, margin: "0 auto" }}>
+            <div
+              style={{
+                fontSize: 13,
+                fontWeight: 600,
+                letterSpacing: "0.12em",
+                textTransform: "uppercase",
+                color: "var(--orange)",
+                marginBottom: 18,
+                textAlign: "center",
+              }}
+            >
+              About
+            </div>
+            <h2
+              style={{
+                fontFamily: "Satoshi, sans-serif",
+                fontWeight: 900,
+                fontSize: "clamp(36px, 5vw, 64px)",
+                letterSpacing: "-0.04em",
+                lineHeight: 1.05,
+                textAlign: "center",
+                marginBottom: 40,
+              }}
+            >
+              Three decades of turning complexity into clarity.
+            </h2>
+            <p
+              style={{
+                fontSize: "clamp(17px, 1.5vw, 21px)",
+                color: "var(--ink-200)",
+                lineHeight: 1.65,
+                margin: "0 auto 24px",
+                maxWidth: 760,
+                textAlign: "center",
+              }}
+            >
+              FleetExpedite is built by{" "}
+              <strong style={{ color: "#fff" }}>Branislav Bubalo</strong>,
+              founder of IVART LLC. With nearly thirty years leading
+              high-impact programs across technology and finance, Branislav
+              directed cross-functional teams at Apple through flagship
+              launches including{" "}
+              <strong style={{ color: "#fff" }}>iTunes Radio</strong> and{" "}
+              <strong style={{ color: "#fff" }}>AppleCare Support</strong>.
+            </p>
+
+            {/* Founder avatar — quiet, premium */}
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: 16,
+                margin: "32px auto 32px",
+                padding: "16px 24px",
+                background: "var(--glass)",
+                border: "1px solid var(--line-1)",
+                borderRadius: 999,
+                width: "fit-content",
+              }}
+            >
+              <img
+                src="/images/founder.jpg"
+                alt="Branislav Bubalo"
+                style={{
+                  width: 56,
+                  height: 56,
+                  borderRadius: "50%",
+                  objectFit: "cover",
+                  objectPosition: "center top",
+                  border: "2px solid rgba(255, 122, 45, 0.3)",
+                  display: "block",
+                }}
+              />
+              <div style={{ textAlign: "left" }}>
+                <div
+                  style={{
+                    fontFamily: "Satoshi, sans-serif",
+                    fontWeight: 700,
+                    fontSize: 15,
+                    color: "#fff",
+                    letterSpacing: "-0.01em",
+                    lineHeight: 1.2,
+                  }}
+                >
+                  Branislav Bubalo
+                </div>
+                <div
+                  style={{
+                    fontSize: 12,
+                    color: "var(--ink-400)",
+                    letterSpacing: "0.04em",
+                    marginTop: 2,
+                  }}
+                >
+                  Founder &amp; CEO
                 </div>
               </div>
             </div>
-          </div>
-        </section>
 
-        {/* CTA */}
-        <section className="py-20 px-6 bg-gradient-to-r from-blue-600 to-purple-600">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-5xl font-bold text-white mb-6">{t.cta.title}</h2>
-            <p className="text-2xl text-white/90 mb-8">{t.cta.subtitle}</p>
-            <button 
-              onClick={() => setShowRegisterModal(true)}
-              className="px-12 py-5 bg-white hover:bg-gray-100 rounded-xl text-blue-600 font-bold text-xl transition shadow-2xl"
+            <p
+              style={{
+                fontSize: "clamp(16px, 1.4vw, 19px)",
+                color: "var(--ink-300)",
+                lineHeight: 1.65,
+                margin: "0 auto",
+                maxWidth: 760,
+                textAlign: "center",
+              }}
             >
-              {t.cta.button}
-            </button>
-            <p className="text-white/70 mt-6">{t.cta.nobind}</p>
+              That same discipline — global coordination, agile execution, and
+              relentless focus on measurable outcomes — now powers the platform
+              we&apos;re building for the next generation of trucking.
+            </p>
+
+            <div
+              style={{
+                marginTop: 56,
+                display: "flex",
+                justifyContent: "center",
+                gap: 32,
+                flexWrap: "wrap",
+                fontSize: 13,
+                color: "var(--ink-400)",
+                letterSpacing: "0.02em",
+              }}
+            >
+              <span>Founded 2024</span>
+              <span style={{ opacity: 0.5 }}>·</span>
+              <span>IVART LLC</span>
+              <span style={{ opacity: 0.5 }}>·</span>
+              <span>Sheridan, Wyoming</span>
+            </div>
           </div>
         </section>
 
-        {/* Contact */}
-        <section id="contact" className="py-20 px-6">
-          <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-4xl font-bold text-white mb-6">{t.contact.title}</h2>
-            <p className="text-xl text-white/60 mb-8">{t.contact.subtitle}</p>
-            <div>
-              <div className="text-white/60 mb-2 text-lg">{t.contact.email}</div>
-              <a href="mailto:contact@fleetexpedite.com" className="text-3xl text-blue-400 hover:text-blue-300 transition font-bold">
-                contact@fleetexpedite.com
+        {/* ============================= CONTACT ============================= */}
+        <section
+          className="reveal"
+          id="contact"
+          style={{
+            padding: "120px 28px 80px",
+            maxWidth: 1240,
+            margin: "0 auto",
+          }}
+        >
+          <div style={{ textAlign: "center", maxWidth: 720, margin: "0 auto 64px" }}>
+            <div
+              style={{
+                fontSize: 13,
+                fontWeight: 600,
+                letterSpacing: "0.12em",
+                textTransform: "uppercase",
+                color: "var(--orange)",
+                marginBottom: 18,
+              }}
+            >
+              Get in touch
+            </div>
+            <h2
+              style={{
+                fontFamily: "Satoshi, sans-serif",
+                fontWeight: 900,
+                fontSize: "clamp(40px, 6vw, 72px)",
+                letterSpacing: "-0.045em",
+                lineHeight: 1.0,
+                margin: 0,
+              }}
+            >
+              Let&apos;s talk.
+            </h2>
+          </div>
+
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+              gap: 16,
+              maxWidth: 1000,
+              margin: "0 auto",
+            }}
+          >
+            {[
+              {
+                label: "PRESS & MEDIA",
+                desc: "Stories, interviews, embargoes.",
+                email: "press@fleetexpedite.com",
+              },
+              {
+                label: "PARTNERSHIPS",
+                desc: "Integrations, vendor programs, channel.",
+                email: "partnerships@fleetexpedite.com",
+              },
+              {
+                label: "GENERAL",
+                desc: "Anything else — we read every email.",
+                email: "contact@fleetexpedite.com",
+              },
+            ].map((card) => (
+              <a
+                key={card.label}
+                href={`mailto:${card.email}`}
+                style={{
+                  background: "var(--glass)",
+                  border: "1px solid var(--line-2)",
+                  borderRadius: 24,
+                  padding: "32px 28px",
+                  display: "block",
+                  transition: "border-color 0.2s ease, transform 0.2s ease",
+                }}
+              >
+                <div
+                  style={{
+                    fontSize: 11,
+                    fontWeight: 700,
+                    letterSpacing: "0.15em",
+                    color: "var(--ink-400)",
+                    marginBottom: 14,
+                  }}
+                >
+                  {card.label}
+                </div>
+                <div
+                  style={{
+                    color: "var(--ink-200)",
+                    fontSize: 15,
+                    lineHeight: 1.5,
+                    marginBottom: 18,
+                  }}
+                >
+                  {card.desc}
+                </div>
+                <div
+                  style={{
+                    color: "var(--orange)",
+                    fontSize: 14,
+                    fontWeight: 600,
+                    fontFamily:
+                      "ui-monospace, SFMono-Regular, Menlo, monospace",
+                  }}
+                >
+                  {card.email} →
+                </div>
               </a>
-            </div>
+            ))}
+          </div>
+
+          {/* For drivers — quiet redirect */}
+          <div
+            style={{
+              marginTop: 56,
+              padding: "24px 28px",
+              background: "var(--glass)",
+              border: "1px solid var(--line-1)",
+              borderRadius: 16,
+              maxWidth: 720,
+              margin: "56px auto 0",
+              textAlign: "center",
+            }}
+          >
+            <span style={{ color: "var(--ink-300)", fontSize: 14 }}>
+              Are you a driver looking for the app?{" "}
+            </span>
+            <a
+              href="https://fleetexpedite.io"
+              style={{
+                color: "var(--orange)",
+                fontSize: 14,
+                fontWeight: 600,
+                marginLeft: 4,
+              }}
+            >
+              fleetexpedite.io →
+            </a>
           </div>
         </section>
 
-        {/* Footer */}
-        <footer className="py-12 px-6 border-t border-white/10">
-          <div className="max-w-7xl mx-auto text-center">
-            <div className="text-3xl font-bold text-white mb-4 flex items-center justify-center gap-3">
-              <div className="relative w-14 h-14">
-                <Image 
-                  src="/images/logo.jpg" 
-                  alt="FleetExpedite" 
-                  fill
-                  className="rounded-lg shadow-lg object-cover"
-                />
-              </div>
-            </div>
-            <p className="text-white/60 mb-2 text-lg">{t.footer.tagline}</p>
-            <p className="text-white/50 mb-6">{t.footer.location}</p>
-            <p className="text-white/40">{t.footer.rights}</p>
+        {/* ============================= FOOTER ============================= */}
+        <footer
+          style={{
+            padding: "60px 28px 40px",
+            borderTop: "1px solid var(--line-1)",
+            maxWidth: 1240,
+            margin: "0 auto",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            flexWrap: "wrap",
+            gap: 20,
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: 12,
+              fontFamily: "Satoshi, sans-serif",
+              fontWeight: 700,
+              fontSize: 16,
+            }}
+          >
+            <img src="/images/logo.jpg" alt="" style={{ height: 28, borderRadius: 5 }} />
+            <span>FleetExpedite</span>
+          </div>
+          <div style={{ fontSize: 13, color: "var(--ink-400)" }}>
+            © 2026 IVART LLC · Sheridan, Wyoming
+            <a
+              href="mailto:contact@fleetexpedite.com"
+              style={{ color: "var(--ink-300)", marginLeft: 18 }}
+            >
+              Contact
+            </a>
+            <a
+              href="https://fleetexpedite.io"
+              style={{ color: "var(--ink-300)", marginLeft: 18 }}
+            >
+              For drivers
+            </a>
           </div>
         </footer>
-      </div>
+      </main>
     </>
-  );
-}
-
-function PricingCard({ badge, name, productName, price, priceSubtext, period, desc, features, comparison, cta, color, popular, promotion, urgent, onClick, link }: any) {
-  const colors: any = {
-    blue: 'from-blue-500/20 to-blue-600/20 border-blue-500/50',
-    green: 'from-green-500/20 to-green-600/20 border-green-500/50',
-    purple: 'from-purple-500/20 to-purple-600/20 border-purple-500/50',
-    orange: 'from-orange-500/20 to-red-600/20 border-orange-500/50',
-  };
-
-  const badgeColors: any = {
-    blue: 'bg-blue-500',
-    green: 'bg-green-500',
-    purple: 'bg-purple-500',
-    orange: 'bg-gradient-to-r from-orange-500 to-red-500',
-  };
-
-  return (
-    <div className={`relative bg-gradient-to-br ${colors[color]} border-2 rounded-2xl p-8 ${popular ? 'scale-105 shadow-2xl ring-4 ring-orange-500/50' : ''}`}>
-      {popular && (
-        <div className="absolute -top-3 -right-3 bg-red-500 text-white px-4 py-1 rounded-full text-xs font-bold animate-pulse">
-          HOT DEAL
-        </div>
-      )}
-      <div className={`absolute -top-4 left-1/2 -translate-x-1/2 px-6 py-2 ${badgeColors[color]} rounded-full text-white text-sm font-bold whitespace-nowrap`}>
-        {badge}
-      </div>
-      <h3 className="text-2xl font-bold text-white mb-1 mt-4">{name}</h3>
-      <p className="text-blue-400 font-semibold text-lg mb-2">{productName}</p>
-      <p className="text-white/60 mb-6">{desc}</p>
-      
-      {promotion && (
-        <div className="bg-orange-500/20 border border-orange-500/50 rounded-xl p-4 mb-6">
-          <div className="text-orange-400 font-bold text-sm mb-2">{promotion.title}</div>
-          <ul className="space-y-1">
-            {promotion.highlights.map((highlight: string, i: number) => (
-              <li key={i} className="text-white/90 text-xs flex items-center gap-2">
-                <span className="text-orange-400">★</span>
-                {highlight}
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
-      
-      <div className="mb-6">
-        <div className="text-4xl font-bold text-white">{price}</div>
-        {priceSubtext && <div className="text-2xl text-white/80 mt-1">{priceSubtext}</div>}
-        {period && <div className="text-white/60 text-xl">{period}</div>}
-      </div>
-      
-      <div className="text-sm text-white/50 mb-6 italic">{comparison}</div>
-      <ul className="space-y-3 mb-8">
-        {features.map((feature: string, i: number) => (
-          <li key={i} className="flex items-start gap-3 text-white/80">
-            <span className="text-green-400 text-lg mt-0.5">✓</span>
-            <span>{feature}</span>
-          </li>
-        ))}
-      </ul>
-      <button 
-        onClick={onClick}
-        className={`w-full py-4 ${popular ? 'bg-orange-500 hover:bg-orange-600' : 'bg-white/20 hover:bg-white/30'} rounded-xl text-white font-bold transition text-lg ${popular ? 'shadow-lg shadow-orange-500/50 animate-pulse' : ''}`}
-      >
-        {cta}
-      </button>
-      {link && (
-        <a href={link} className="block text-center text-white/60 hover:text-white text-sm mt-3 transition">
-          Learn more →
-        </a>
-      )}
-    </div>
   );
 }
