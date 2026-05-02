@@ -101,7 +101,7 @@ export default function HomePage() {
             left: 0,
             right: 0,
             zIndex: 50,
-            height: 64,
+            height: 96,
             backdropFilter: "saturate(180%) blur(18px)",
             WebkitBackdropFilter: "saturate(180%) blur(18px)",
             background: "rgba(10, 20, 40, 0.6)",
@@ -131,7 +131,7 @@ export default function HomePage() {
                 color: "var(--ink-100)",
               }}
             >
-              <img src="/images/logo.jpg" alt="FleetExpedite" style={{ height: 44, width: "auto", display: "block", borderRadius: 6 }} />
+              <img src="/images/logo.png" alt="FleetExpedite" style={{ height: 80, width: "auto", display: "block" }} />
               <span>FleetExpedite</span>
             </a>
             <a
@@ -155,7 +155,7 @@ export default function HomePage() {
         <section
           style={{
             position: "relative",
-            padding: "160px 28px 80px",
+            padding: "192px 28px 80px",
             maxWidth: 1240,
             margin: "0 auto",
             overflow: "hidden",
@@ -836,7 +836,7 @@ export default function HomePage() {
               fontSize: 16,
             }}
           >
-            <img src="/images/logo.jpg" alt="" style={{ height: 36, borderRadius: 5 }} />
+            <img src="/images/logo.png" alt="" style={{ height: 48 }} />
             <span>FleetExpedite</span>
           </div>
           <div style={{ fontSize: 13, color: "var(--ink-400)" }}>
