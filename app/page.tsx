@@ -131,7 +131,7 @@ export default function HomePage() {
                 color: "var(--ink-100)",
               }}
             >
-              <img src="/images/logo.jpg" alt="FleetExpedite" style={{ height: 32, width: "auto", display: "block", borderRadius: 6 }} />
+              <img src="/images/logo.jpg" alt="FleetExpedite" style={{ height: 44, width: "auto", display: "block", borderRadius: 6 }} />
               <span>FleetExpedite</span>
             </a>
             <a
@@ -836,7 +836,7 @@ export default function HomePage() {
               fontSize: 16,
             }}
           >
-            <img src="/images/logo.jpg" alt="" style={{ height: 28, borderRadius: 5 }} />
+            <img src="/images/logo.jpg" alt="" style={{ height: 36, borderRadius: 5 }} />
             <span>FleetExpedite</span>
           </div>
           <div style={{ fontSize: 13, color: "var(--ink-400)" }}>
