@@ -368,7 +368,7 @@ export default function HomePage() {
                 margin: 0,
               }}
             >
-              Three pillars.{" "}
+              Two pillars.{" "}
               <span style={{ color: "var(--ink-400)" }}>One platform.</span>
             </h2>
           </div>
@@ -422,51 +422,6 @@ export default function HomePage() {
               >
                 Multi-board search, profitability scoring, automated rate
                 negotiation drafts, and one-tap rate confirmation signing.
-              </p>
-            </div>
-
-            {/* Fleet Operations */}
-            <div
-              style={{
-                background: "var(--glass)",
-                border: "1px solid var(--line-2)",
-                borderRadius: 24,
-                padding: "36px 32px",
-              }}
-            >
-              <div
-                style={{
-                  fontSize: 12,
-                  fontWeight: 700,
-                  letterSpacing: "0.15em",
-                  color: "var(--ink-400)",
-                  marginBottom: 16,
-                }}
-              >
-                02 · OPERATIONS
-              </div>
-              <h3
-                style={{
-                  fontFamily: "Satoshi, sans-serif",
-                  fontSize: 26,
-                  fontWeight: 800,
-                  letterSpacing: "-0.025em",
-                  lineHeight: 1.15,
-                  margin: "0 0 14px 0",
-                }}
-              >
-                Connected financial workflows.
-              </h3>
-              <p
-                style={{
-                  color: "var(--ink-300)",
-                  fontSize: 15,
-                  lineHeight: 1.55,
-                  margin: 0,
-                }}
-              >
-                Real-time fuel card transactions, automatic IFTA, QuickBooks
-                sync, and clean books — every load, every mile, accounted for.
               </p>
             </div>
 
@@ -550,7 +505,7 @@ export default function HomePage() {
               opacity: 0.85,
             }}
           >
-            {["WEX", "Apex Capital", "QuickBooks", "EFS", "Stripe", "Plaid"].map(
+            {["Apex Capital", "EFS", "Stripe", "Plaid"].map(
               (name) => (
                 <span
                   key={name}
