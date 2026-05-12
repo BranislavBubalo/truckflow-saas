@@ -93,6 +93,39 @@ export default function WexSetupPage() {
           automatically.
         </p>
 
+        {/* Video Tutorial */}
+        <SectionHeader>📹 Watch the Quick Tutorial</SectionHeader>
+        <p style={{ marginTop: 0, marginBottom: 16, color: "#6B7280", fontSize: 14 }}>
+          Less than 1 minute. Watch this first, then follow the steps below.
+        </p>
+        <div
+          style={{
+            position: "relative",
+            width: "100%",
+            maxWidth: 360,
+            margin: "0 auto 24px",
+            aspectRatio: "9 / 16",
+            borderRadius: 16,
+            overflow: "hidden",
+            boxShadow: "0 8px 24px rgba(30, 64, 175, 0.15)",
+          }}
+        >
+          <iframe
+            src="https://www.youtube.com/embed/e-So6HLJTFQ"
+            title="FleetExpedite — Connect Your WEX Card"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowFullScreen
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%",
+              border: "none",
+            }}
+          />
+        </div>
+
         {/* Before You Start */}
         <SectionHeader>Before You Start</SectionHeader>
 
