@@ -505,7 +505,7 @@ export default function HomePage() {
               opacity: 0.85,
             }}
           >
-            {["Apex Capital", "EFS", "Stripe", "Plaid"].map(
+            {["Single Point Capital", "EFS", "Stripe", "Plaid"].map(
               (name) => (
                 <span
                   key={name}
